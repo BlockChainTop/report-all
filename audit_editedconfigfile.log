@@ -1,0 +1,592 @@
+'npx hardhat compile --force' running
+Compiling 52 files with 0.8.9
+Compilation finished successfully
+
+Solidity 0.8.9 is not fully supported yet. You can still use Hardhat, but some features, like stack traces, might not work correctly.
+
+Learn more at https://hardhat.org/reference/solidity-support"
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> contracts/factory/PProxiedFactory.sol:44:5:
+   |
+44 |     uint256 _initialSupply,
+   |     ^^^^^^^^^^^^^^^^^^^^^^
+
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> contracts/factory/PProxiedFactory.sol:48:5:
+   |
+48 |     uint256 _cap
+   |     ^^^^^^^^^^^^
+
+
+
+[91m
+PProxiedFactory.newProxiedSmartPool(string,string,uint256,address[],uint256[],uint256[],uint256) (contracts/factory/PProxiedFactory.sol#41-100) ignores return value by token.transferFrom(msg.sender,address(this),_amounts[i]) (contracts/factory/PProxiedFactory.sol#67)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unchecked-transfer[0m
+[93m
+LibFees.calcOutstandingAnnualFee() (contracts/libraries/LibFees.sol#19-32) performs a multiplication on the result of a division:
+	-totalSupply.mul(v2s.annualFee).div(10 ** 18).mul(timePassed).div(31536000) (contracts/libraries/LibFees.sol#31)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#divide-before-multiply[0m
+[93m
+LibFees.chargeOutstandingAnnualFee() (contracts/libraries/LibFees.sol#34-48) uses a dangerous strict equality:
+	- outstandingFee == 0 (contracts/libraries/LibFees.sol#38)
+LibWeights.pokeWeights() (contracts/libraries/LibWeights.sol#122-163) uses a dangerous strict equality:
+	- minBetweenEndBlockAndThisBlock == ws.endBlock (contracts/libraries/LibWeights.sol#156)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dangerous-strict-equalities[0m
+[93m
+Contract locking ether found:
+	Contract PProxiedFactory (contracts/factory/PProxiedFactory.sol#15-101) has payable functions:
+	 - PProxiedFactory.newProxiedSmartPool(string,string,uint256,address[],uint256[],uint256[],uint256) (contracts/factory/PProxiedFactory.sol#41-100)
+	But does not have a function to withdraw the ether
+Contract locking ether found:
+	Contract PProxyOverrideablePausable (contracts/module/proxy/contracts/PProxyOverrideablePausable.sol#8-13) has payable functions:
+	 - PProxy.fallback() (contracts/module/proxy/contracts/PProxy.sol#38-40)
+	 - PProxy.receive() (contracts/module/proxy/contracts/PProxy.sol#57-59)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#contracts-that-lock-ether[0m
+[93m
+LibDiamond.diamondCut(IDiamondCut.FacetCut[],address,bytes).facetIndex (contracts/libraries/LibDiamond.sol#60) is a local variable never initialized
+LibDiamond.removeFunctions(address,bytes4[]).selectorIndex (contracts/libraries/LibDiamond.sol#114) is a local variable never initialized
+LibDiamond.replaceFunctions(address,bytes4[]).selectorIndex (contracts/libraries/LibDiamond.sol#97) is a local variable never initialized
+PProxiedFactory.newProxiedSmartPool(string,string,uint256,address[],uint256[],uint256[],uint256).poolReturns (contracts/factory/PProxiedFactory.sol#95) is a local variable never initialized
+LibDiamond.addFunctions(address,bytes4[]).selectorIndex (contracts/libraries/LibDiamond.sol#82) is a local variable never initialized
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#uninitialized-local-variables[0m
+[93m
+LibSafeApprove.safeApprove(IERC20,address,uint256) (contracts/libraries/LibSafeApprove.sol#8-23) ignores return value by _token.approve(_spender,0) (contracts/libraries/LibSafeApprove.sol#18)
+LibSafeApprove.safeApprove(IERC20,address,uint256) (contracts/libraries/LibSafeApprove.sol#8-23) ignores return value by _token.approve(_spender,_amount) (contracts/libraries/LibSafeApprove.sol#22)
+TestLibSafeApprove.doubleApprovalUnsafe(address) (contracts/test/TestLibSafeApprove.sol#11-16) ignores return value by token.approve(msg.sender,1337) (contracts/test/TestLibSafeApprove.sol#14)
+TestLibSafeApprove.doubleApprovalUnsafe(address) (contracts/test/TestLibSafeApprove.sol#11-16) ignores return value by token.approve(msg.sender,42) (contracts/test/TestLibSafeApprove.sol#15)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unused-return[0m
+[92m
+PProxiedFactory.init(address,address)._implementation (contracts/factory/PProxiedFactory.sol#29) lacks a zero-check on :
+		- smartPoolImplementation = _implementation (contracts/factory/PProxiedFactory.sol#34)
+PProxiedFactory.setImplementation(address)._implementation (contracts/factory/PProxiedFactory.sol#37) lacks a zero-check on :
+		- smartPoolImplementation = _implementation (contracts/factory/PProxiedFactory.sol#38)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation[0m
+[92m
+Modifier Migrations.restricted() (contracts/Migrations.sol#9-11) does not always execute _; or revertReference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-modifier[0m
+[92m
+ViewFacet.getDenormalizedWeights() (contracts/Facet/ViewFacet.sol#208-215) has external calls inside a loop: weights[i] = s.bPool.getDenormalizedWeight(tokens[i]) (contracts/Facet/ViewFacet.sol#213)
+PProxiedFactory.newProxiedSmartPool(string,string,uint256,address[],uint256[],uint256[],uint256) (contracts/factory/PProxiedFactory.sol#41-100) has external calls inside a loop: token.transferFrom(msg.sender,address(this),_amounts[i]) (contracts/factory/PProxiedFactory.sol#67)
+PProxiedFactory.newProxiedSmartPool(string,string,uint256,address[],uint256[],uint256[],uint256) (contracts/factory/PProxiedFactory.sol#41-100) has external calls inside a loop: bPool.bind(_tokens[i],_amounts[i],_weights[i]) (contracts/factory/PProxiedFactory.sol#73)
+LibPoolEntryExit.exitPoolTakingloss(uint256,address[]) (contracts/libraries/LibPoolEntryExit.sol#141-167) has external calls inside a loop: bal = bPool.getBalance(t) (contracts/libraries/LibPoolEntryExit.sol#161)
+LibPoolMath.calcTokensForAmount(uint256) (contracts/libraries/LibPoolMath.sol#268-285) has external calls inside a loop: bal = PBasicSmartPoolStorage.load().bPool.getBalance(t) (contracts/libraries/LibPoolMath.sol#281)
+LibWeights.updateWeightsGradually(uint256[],uint256,uint256) (contracts/libraries/LibWeights.sol#82-120) has external calls inside a loop: ws.startWeights.push(s.bPool.getDenormalizedWeight(tokens[i_scope_0])) (contracts/libraries/LibWeights.sol#118)
+LibWeights.pokeWeights() (contracts/libraries/LibWeights.sol#122-163) has external calls inside a loop: s.bPool.rebind(tokens[i],s.bPool.getBalance(tokens[i]),newWeight) (contracts/libraries/LibWeights.sol#153)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation/#calls-inside-a-loop[0m
+[92m
+Reentrancy in PProxiedFactory.newProxiedSmartPool(string,string,uint256,address[],uint256[],uint256[],uint256) (contracts/factory/PProxiedFactory.sol#41-100):
+	External calls:
+	- proxy.setImplementation(smartPoolImplementation) (contracts/factory/PProxiedFactory.sol#55)
+	- proxy.setPauzer(msg.sender) (contracts/factory/PProxiedFactory.sol#56)
+	- proxy.setProxyOwner(msg.sender) (contracts/factory/PProxiedFactory.sol#57)
+	- balancerPoolAddress = balancerFactory.newBPool() (contracts/factory/PProxiedFactory.sol#60)
+	- bPool.setController(address(proxy)) (contracts/factory/PProxiedFactory.sol#76)
+	State variables written after the call(s):
+	- isPool[address(smartPool)] = true (contracts/factory/PProxiedFactory.sol#89)
+	- pools.push(address(smartPool)) (contracts/factory/PProxiedFactory.sol#90)
+Reentrancy in PV2SmartPool.setCut(address,address) (contracts/smart-pools/PV2SmartPool.sol#46-59):
+	External calls:
+	- LibDiamond.diamondCut(cut,address(0),) (contracts/smart-pools/PV2SmartPool.sol#57)
+	State variables written after the call(s):
+	- setCutable = false (contracts/smart-pools/PV2SmartPool.sol#58)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-2[0m
+[92m
+Reentrancy in LibPoolEntryExit._exitPool(uint256,uint256[]) (contracts/libraries/LibPoolEntryExit.sol#44-69):
+	External calls:
+	- lockBPoolSwap() (contracts/libraries/LibPoolEntryExit.sol#44)
+		- bPool.setPublicSwap(false) (contracts/libraries/LibPoolEntryExit.sol#25)
+		- bPool.setPublicSwap(true) (contracts/libraries/LibPoolEntryExit.sol#27)
+	Event emitted after the call(s):
+	- LOG_EXIT(msg.sender,token,tokenAmountOut) (contracts/libraries/LibPoolEntryExit.sol#65)
+	- PoolExited(msg.sender,_amount) (contracts/libraries/LibPoolEntryExit.sol#68)
+Reentrancy in LibPoolEntryJoin._joinPool(uint256,uint256[]) (contracts/libraries/LibPoolEntryJoin.sol#45-67):
+	External calls:
+	- lockBPoolSwap() (contracts/libraries/LibPoolEntryJoin.sol#45)
+		- bPool.setPublicSwap(false) (contracts/libraries/LibPoolEntryJoin.sol#23)
+		- bPool.setPublicSwap(true) (contracts/libraries/LibPoolEntryJoin.sol#25)
+	Event emitted after the call(s):
+	- LOG_JOIN(msg.sender,t,tokenAmountIn) (contracts/libraries/LibPoolEntryJoin.sol#62)
+	- PoolJoined(msg.sender,_amount) (contracts/libraries/LibPoolEntryJoin.sol#66)
+Reentrancy in LibPoolEntryExit.exitPoolTakingloss(uint256,address[]) (contracts/libraries/LibPoolEntryExit.sol#141-167):
+	External calls:
+	- lockBPoolSwap() (contracts/libraries/LibPoolEntryExit.sol#143)
+		- bPool.setPublicSwap(false) (contracts/libraries/LibPoolEntryExit.sol#25)
+		- bPool.setPublicSwap(true) (contracts/libraries/LibPoolEntryExit.sol#27)
+	Event emitted after the call(s):
+	- LOG_EXIT(msg.sender,t,tAo) (contracts/libraries/LibPoolEntryExit.sol#163)
+	- PoolExitedWithLoss(msg.sender,_amount,_lossTokens) (contracts/libraries/LibPoolEntryExit.sol#166)
+Reentrancy in LibPoolEntryExit.exitswapExternAmountOut(address,uint256,uint256) (contracts/libraries/LibPoolEntryExit.sol#106-139):
+	External calls:
+	- lockBPoolSwap() (contracts/libraries/LibPoolEntryExit.sol#110)
+		- bPool.setPublicSwap(false) (contracts/libraries/LibPoolEntryExit.sol#25)
+		- bPool.setPublicSwap(true) (contracts/libraries/LibPoolEntryExit.sol#27)
+	Event emitted after the call(s):
+	- LOG_EXIT(msg.sender,_token,_tokenAmountOut) (contracts/libraries/LibPoolEntryExit.sol#129)
+	- PoolExited(msg.sender,_tokenAmountOut) (contracts/libraries/LibPoolEntryExit.sol#133)
+Reentrancy in LibPoolEntryExit.exitswapPoolAmountIn(address,uint256,uint256) (contracts/libraries/LibPoolEntryExit.sol#71-104):
+	External calls:
+	- lockBPoolSwap() (contracts/libraries/LibPoolEntryExit.sol#75)
+		- bPool.setPublicSwap(false) (contracts/libraries/LibPoolEntryExit.sol#25)
+		- bPool.setPublicSwap(true) (contracts/libraries/LibPoolEntryExit.sol#27)
+	Event emitted after the call(s):
+	- LOG_EXIT(msg.sender,_token,tokenAmountOut) (contracts/libraries/LibPoolEntryExit.sol#94)
+	- PoolExited(msg.sender,tokenAmountOut) (contracts/libraries/LibPoolEntryExit.sol#98)
+Reentrancy in LibPoolEntryJoin.joinswapExternAmountIn(address,uint256,uint256) (contracts/libraries/LibPoolEntryJoin.sol#69-102):
+	External calls:
+	- lockBPoolSwap() (contracts/libraries/LibPoolEntryJoin.sol#73)
+		- bPool.setPublicSwap(false) (contracts/libraries/LibPoolEntryJoin.sol#23)
+		- bPool.setPublicSwap(true) (contracts/libraries/LibPoolEntryJoin.sol#25)
+	Event emitted after the call(s):
+	- LOG_JOIN(msg.sender,_token,_amountIn) (contracts/libraries/LibPoolEntryJoin.sol#92)
+	- PoolJoined(msg.sender,poolAmountOut) (contracts/libraries/LibPoolEntryJoin.sol#96)
+Reentrancy in LibPoolEntryJoin.joinswapPoolAmountOut(address,uint256,uint256) (contracts/libraries/LibPoolEntryJoin.sol#104-137):
+	External calls:
+	- lockBPoolSwap() (contracts/libraries/LibPoolEntryJoin.sol#108)
+		- bPool.setPublicSwap(false) (contracts/libraries/LibPoolEntryJoin.sol#23)
+		- bPool.setPublicSwap(true) (contracts/libraries/LibPoolEntryJoin.sol#25)
+	Event emitted after the call(s):
+	- LOG_JOIN(msg.sender,_token,tokenAmountIn) (contracts/libraries/LibPoolEntryJoin.sol#127)
+	- PoolJoined(msg.sender,_amountOut) (contracts/libraries/LibPoolEntryJoin.sol#131)
+Reentrancy in PProxiedFactory.newProxiedSmartPool(string,string,uint256,address[],uint256[],uint256[],uint256) (contracts/factory/PProxiedFactory.sol#41-100):
+	External calls:
+	- proxy.setImplementation(smartPoolImplementation) (contracts/factory/PProxiedFactory.sol#55)
+	- proxy.setPauzer(msg.sender) (contracts/factory/PProxiedFactory.sol#56)
+	- proxy.setProxyOwner(msg.sender) (contracts/factory/PProxiedFactory.sol#57)
+	- balancerPoolAddress = balancerFactory.newBPool() (contracts/factory/PProxiedFactory.sol#60)
+	- bPool.setController(address(proxy)) (contracts/factory/PProxiedFactory.sol#76)
+	Event emitted after the call(s):
+	- SmartPoolCreated(address(smartPool),address(balancerPoolAddress),_name,_symbol) (contracts/factory/PProxiedFactory.sol#92)
+Reentrancy in AdminFacet.tripCircuitBreaker() (contracts/Facet/AdminFacet.sol#257-261):
+	External calls:
+	- PBasicSmartPoolStorage.load().bPool.setPublicSwap(false) (contracts/Facet/AdminFacet.sol#259)
+	Event emitted after the call(s):
+	- CircuitBreakerTripped() (contracts/Facet/AdminFacet.sol#260)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-3[0m
+[92m
+LibFees.chargeOutstandingAnnualFee() (contracts/libraries/LibFees.sol#34-48) uses timestamp for comparisons
+	Dangerous comparisons:
+	- outstandingFee == 0 (contracts/libraries/LibFees.sol#38)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp[0m
+[92m
+DiamondLoupeFacet.facets() (contracts/Facet/DiamondLoupeFacet.sol#23-72) uses assembly
+	- INLINE ASM (contracts/Facet/DiamondLoupeFacet.sol#64-66)
+	- INLINE ASM (contracts/Facet/DiamondLoupeFacet.sol#69-71)
+DiamondLoupeFacet.facetFunctionSelectors(address) (contracts/Facet/DiamondLoupeFacet.sol#77-95) uses assembly
+	- INLINE ASM (contracts/Facet/DiamondLoupeFacet.sol#92-94)
+DiamondLoupeFacet.facetAddresses() (contracts/Facet/DiamondLoupeFacet.sol#99-130) uses assembly
+	- INLINE ASM (contracts/Facet/DiamondLoupeFacet.sol#127-129)
+LibDiamond.diamondStorage() (contracts/libraries/LibDiamond.sol#27-32) uses assembly
+	- INLINE ASM (contracts/libraries/LibDiamond.sol#29-31)
+LibDiamond.enforceHasContractCode(address,string) (contracts/libraries/LibDiamond.sol#153-159) uses assembly
+	- INLINE ASM (contracts/libraries/LibDiamond.sol#155-157)
+PProxy.internalFallback() (contracts/module/proxy/contracts/PProxy.sol#42-55) uses assembly
+	- INLINE ASM (contracts/module/proxy/contracts/PProxy.sol#44-54)
+PProxyOverrideable.internalFallback() (contracts/module/proxy/contracts/PProxyOverrideable.sol#20-39) uses assembly
+	- INLINE ASM (contracts/module/proxy/contracts/PProxyOverrideable.sol#25-35)
+PProxyStorage.storageRead(bytes32) (contracts/module/proxy/contracts/PProxyStorage.sol#35-42) uses assembly
+	- INLINE ASM (contracts/module/proxy/contracts/PProxyStorage.sol#38-40)
+PProxyStorage.storageSet(bytes32,bytes32) (contracts/module/proxy/contracts/PProxyStorage.sol#44-51) uses assembly
+	- INLINE ASM (contracts/module/proxy/contracts/PProxyStorage.sol#48-50)
+PProxyStorage.stringToBytes32(string) (contracts/module/proxy/contracts/PProxyStorage.sol#61-70) uses assembly
+	- INLINE ASM (contracts/module/proxy/contracts/PProxyStorage.sol#67-69)
+PV2SmartPool.fallback() (contracts/smart-pools/PV2SmartPool.sol#92-120) uses assembly
+	- INLINE ASM (contracts/smart-pools/PV2SmartPool.sol#96-98)
+	- INLINE ASM (contracts/smart-pools/PV2SmartPool.sol#104-119)
+OwnableStorage.load() (contracts/storage/OwnableStorage.sol#15-20) uses assembly
+	- INLINE ASM (contracts/storage/OwnableStorage.sol#17-19)
+PBasicSmartPoolStorage.load() (contracts/storage/PBasicSmartPoolStorage.sol#21-26) uses assembly
+	- INLINE ASM (contracts/storage/PBasicSmartPoolStorage.sol#23-25)
+PCTokenStorage.load() (contracts/storage/PCTokenStorage.sol#19-24) uses assembly
+	- INLINE ASM (contracts/storage/PCTokenStorage.sol#21-23)
+PCappedSmartPoolStorage.load() (contracts/storage/PCappedSmartPoolStorage.sol#16-21) uses assembly
+	- INLINE ASM (contracts/storage/PCappedSmartPoolStorage.sol#18-20)
+PV2SmartPoolStorage.load() (contracts/storage/PV2SmartPoolStorage.sol#29-34) uses assembly
+	- INLINE ASM (contracts/storage/PV2SmartPoolStorage.sol#31-33)
+ReentryProtectionStorage.load() (contracts/storage/ReentryProtectionStorage.sol#15-20) uses assembly
+	- INLINE ASM (contracts/storage/ReentryProtectionStorage.sol#17-19)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#assembly-usage[0m
+[92m
+Different versions of Solidity is used:
+	- Version used: ['^0.8.0', '^0.8.9']
+	- ABIEncoderV2 (contracts/Facet/AdminFacet.sol#3)
+	- ^0.8.9 (contracts/Facet/AdminFacet.sol#5)
+	- ^0.8.9 (contracts/Facet/DiamondCutFacet.sol#2)
+	- ^0.8.9 (contracts/Facet/DiamondLoupeFacet.sol#2)
+	- ABIEncoderV2 (contracts/Facet/InitFacet.sol#3)
+	- ^0.8.9 (contracts/Facet/InitFacet.sol#5)
+	- ABIEncoderV2 (contracts/Facet/PoolEntryFacet.sol#3)
+	- ^0.8.9 (contracts/Facet/PoolEntryFacet.sol#5)
+	- ABIEncoderV2 (contracts/Facet/PoolExitFacet.sol#3)
+	- ^0.8.9 (contracts/Facet/PoolExitFacet.sol#5)
+	- ABIEncoderV2 (contracts/Facet/TokenWeightFacet.sol#3)
+	- ^0.8.9 (contracts/Facet/TokenWeightFacet.sol#5)
+	- ABIEncoderV2 (contracts/Facet/ViewFacet.sol#3)
+	- ^0.8.9 (contracts/Facet/ViewFacet.sol#5)
+	- ^0.8.9 (contracts/Migrations.sol#3)
+	- ^0.8.9 (contracts/Ownable.sol#3)
+	- ^0.8.9 (contracts/PCToken.sol#16)
+	- ^0.8.9 (contracts/ReentryProtection.sol#3)
+	- ^0.8.9 (contracts/factory/PProxiedFactory.sol#3)
+	- ^0.8.9 (contracts/interfaces/IBFactory.sol#3)
+	- ^0.8.9 (contracts/interfaces/IBPool.sol#16)
+	- ^0.8.9 (contracts/interfaces/IDiamondCut.sol#2)
+	- ^0.8.9 (contracts/interfaces/IDiamondLoupe.sol#2)
+	- ^0.8.9 (contracts/interfaces/IERC165.sol#2)
+	- ^0.8.9 (contracts/interfaces/IERC173.sol#2)
+	- ^0.8.9 (contracts/interfaces/IERC20.sol#3)
+	- ABIEncoderV2 (contracts/interfaces/IPV2SmartPool.sol#3)
+	- ^0.8.9 (contracts/interfaces/IPV2SmartPool.sol#4)
+	- ^0.8.9 (contracts/libraries/LibAddRemoveToken.sol#3)
+	- ^0.8.9 (contracts/libraries/LibConst.sol#3)
+	- ^0.8.9 (contracts/libraries/LibDiamond.sol#2)
+	- ^0.8.9 (contracts/libraries/LibFees.sol#3)
+	- ^0.8.9 (contracts/libraries/LibPoolEntryExit.sol#3)
+	- ^0.8.9 (contracts/libraries/LibPoolEntryJoin.sol#3)
+	- ^0.8.9 (contracts/libraries/LibPoolMath.sol#19)
+	- ^0.8.9 (contracts/libraries/LibPoolToken.sol#3)
+	- ^0.8.9 (contracts/libraries/LibSafeApprove.sol#3)
+	- ^0.8.9 (contracts/libraries/LibUnderlying.sol#3)
+	- ^0.8.9 (contracts/libraries/LibWeights.sol#3)
+	- ^0.8.9 (contracts/libraries/Math.sol#3)
+	- ^0.8.9 (contracts/module/proxy/contracts/PProxy.sol#3)
+	- ^0.8.9 (contracts/module/proxy/contracts/PProxyOverrideable.sol#3)
+	- ^0.8.9 (contracts/module/proxy/contracts/PProxyOverrideablePausable.sol#3)
+	- ^0.8.9 (contracts/module/proxy/contracts/PProxyPausable.sol#3)
+	- ^0.8.9 (contracts/module/proxy/contracts/PProxyStorage.sol#3)
+	- ^0.8.9 (contracts/module/proxy/contracts/interfaces/IPProxyOverrides.sol#3)
+	- ^0.8.9 (contracts/module/proxy/contracts/test/TestImplementation.sol#3)
+	- ^0.8.9 (contracts/module/proxy/contracts/test/TestOverrides.sol#3)
+	- ABIEncoderV2 (contracts/smart-pools/PV2SmartPool.sol#3)
+	- ^0.8.9 (contracts/smart-pools/PV2SmartPool.sol#5)
+	- ^0.8.9 (contracts/storage/OwnableStorage.sol#3)
+	- ^0.8.9 (contracts/storage/PBasicSmartPoolStorage.sol#3)
+	- ^0.8.9 (contracts/storage/PCTokenStorage.sol#3)
+	- ^0.8.9 (contracts/storage/PCappedSmartPoolStorage.sol#3)
+	- ^0.8.9 (contracts/storage/PV2SmartPoolStorage.sol#3)
+	- ^0.8.9 (contracts/storage/ReentryProtectionStorage.sol#3)
+	- ^0.8.9 (contracts/test/TestLibSafeApprove.sol#3)
+	- ^0.8.9 (contracts/test/TestPCToken.sol#3)
+	- ^0.8.9 (contracts/test/TestReentryProtection.sol#3)
+	- ^0.8.0 (contracts/upgradeInitializers/DiamondInit.sol#2)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#different-pragma-directives-are-used[0m
+[92m
+LibPoolMath.calcInGivenOut(uint256,uint256,uint256,uint256,uint256,uint256) (contracts/libraries/LibPoolMath.sol#93-109) is never used and should be removed
+LibPoolMath.calcOutGivenIn(uint256,uint256,uint256,uint256,uint256,uint256) (contracts/libraries/LibPoolMath.sol#65-81) is never used and should be removed
+LibPoolMath.calcSpotPrice(uint256,uint256,uint256,uint256,uint256) (contracts/libraries/LibPoolMath.sol#41-53) is never used and should be removed
+PProxyPausable.internalFallback() (contracts/module/proxy/contracts/PProxyPausable.sol#46-48) is never used and should be removed
+PProxyStorage.setString(bytes32,string) (contracts/module/proxy/contracts/PProxyStorage.sol#11-13) is never used and should be removed
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dead-code[0m
+[92m
+Pragma version^0.8.9 (contracts/Facet/AdminFacet.sol#5) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/Facet/DiamondCutFacet.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/Facet/DiamondLoupeFacet.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/Facet/InitFacet.sol#5) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/Facet/PoolEntryFacet.sol#5) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/Facet/PoolExitFacet.sol#5) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/Facet/TokenWeightFacet.sol#5) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/Facet/ViewFacet.sol#5) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/Migrations.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/Ownable.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/PCToken.sol#16) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/ReentryProtection.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/factory/PProxiedFactory.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/interfaces/IBFactory.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/interfaces/IBPool.sol#16) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/interfaces/IDiamondCut.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/interfaces/IDiamondLoupe.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/interfaces/IERC165.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/interfaces/IERC173.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/interfaces/IERC20.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/interfaces/IPV2SmartPool.sol#4) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/libraries/LibAddRemoveToken.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/libraries/LibConst.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/libraries/LibDiamond.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/libraries/LibFees.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/libraries/LibPoolEntryExit.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/libraries/LibPoolEntryJoin.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/libraries/LibPoolMath.sol#19) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/libraries/LibPoolToken.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/libraries/LibSafeApprove.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/libraries/LibUnderlying.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/libraries/LibWeights.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/libraries/Math.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/module/proxy/contracts/PProxy.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/module/proxy/contracts/PProxyOverrideable.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/module/proxy/contracts/PProxyOverrideablePausable.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/module/proxy/contracts/PProxyPausable.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/module/proxy/contracts/PProxyStorage.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/module/proxy/contracts/interfaces/IPProxyOverrides.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/module/proxy/contracts/test/TestImplementation.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/module/proxy/contracts/test/TestOverrides.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/smart-pools/PV2SmartPool.sol#5) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/storage/OwnableStorage.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/storage/PBasicSmartPoolStorage.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/storage/PCTokenStorage.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/storage/PCappedSmartPoolStorage.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/storage/PV2SmartPoolStorage.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/storage/ReentryProtectionStorage.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/test/TestLibSafeApprove.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/test/TestPCToken.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.9 (contracts/test/TestReentryProtection.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.0 (contracts/upgradeInitializers/DiamondInit.sol#2) allows old versions
+solc-0.8.9 is not recommended for deployment
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity[0m
+[92m
+Low level call in LibDiamond.initializeDiamondCut(address,bytes) (contracts/libraries/LibDiamond.sol#133-151):
+	- (success,error) = _init.delegatecall(_calldata) (contracts/libraries/LibDiamond.sol#141)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls[0m
+[92m
+TestOverrides (contracts/module/proxy/contracts/test/TestOverrides.sol#5-35) should inherit from IPProxyOverrides (contracts/module/proxy/contracts/interfaces/IPProxyOverrides.sol#5-8)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-inheritance[0m
+[92m
+Parameter AdminFacet.bind(address,uint256,uint256)._token (contracts/Facet/AdminFacet.sol#76) is not in mixedCase
+Parameter AdminFacet.bind(address,uint256,uint256)._balance (contracts/Facet/AdminFacet.sol#77) is not in mixedCase
+Parameter AdminFacet.bind(address,uint256,uint256)._denorm (contracts/Facet/AdminFacet.sol#78) is not in mixedCase
+Parameter AdminFacet.rebind(address,uint256,uint256)._token (contracts/Facet/AdminFacet.sol#100) is not in mixedCase
+Parameter AdminFacet.rebind(address,uint256,uint256)._balance (contracts/Facet/AdminFacet.sol#101) is not in mixedCase
+Parameter AdminFacet.rebind(address,uint256,uint256)._denorm (contracts/Facet/AdminFacet.sol#102) is not in mixedCase
+Parameter AdminFacet.unbind(address)._token (contracts/Facet/AdminFacet.sol#135) is not in mixedCase
+Parameter AdminFacet.setController(address)._controller (contracts/Facet/AdminFacet.sol#156) is not in mixedCase
+Parameter AdminFacet.setPublicSwapSetter(address)._newPublicSwapSetter (contracts/Facet/AdminFacet.sol#165) is not in mixedCase
+Parameter AdminFacet.setTokenBinder(address)._newTokenBinder (contracts/Facet/AdminFacet.sol#178) is not in mixedCase
+Parameter AdminFacet.setPublicSwap(bool)._public (contracts/Facet/AdminFacet.sol#188) is not in mixedCase
+Parameter AdminFacet.setSwapFee(uint256)._swapFee (contracts/Facet/AdminFacet.sol#198) is not in mixedCase
+Parameter AdminFacet.setCap(uint256)._cap (contracts/Facet/AdminFacet.sol#207) is not in mixedCase
+Parameter AdminFacet.setJoinExitEnabled(bool)._newValue (contracts/Facet/AdminFacet.sol#216) is not in mixedCase
+Parameter AdminFacet.setCircuitBreaker(address)._newCircuitBreaker (contracts/Facet/AdminFacet.sol#226) is not in mixedCase
+Parameter AdminFacet.setAnnualFee(uint256)._newFee (contracts/Facet/AdminFacet.sol#236) is not in mixedCase
+Parameter AdminFacet.setFeeRecipient(address)._newRecipient (contracts/Facet/AdminFacet.sol#250) is not in mixedCase
+Parameter DiamondCutFacet.diamondCut(IDiamondCut.FacetCut[],address,bytes)._diamondCut (contracts/Facet/DiamondCutFacet.sol#20) is not in mixedCase
+Parameter DiamondCutFacet.diamondCut(IDiamondCut.FacetCut[],address,bytes)._init (contracts/Facet/DiamondCutFacet.sol#21) is not in mixedCase
+Parameter DiamondCutFacet.diamondCut(IDiamondCut.FacetCut[],address,bytes)._calldata (contracts/Facet/DiamondCutFacet.sol#22) is not in mixedCase
+Parameter DiamondLoupeFacet.facetFunctionSelectors(address)._facet (contracts/Facet/DiamondLoupeFacet.sol#77) is not in mixedCase
+Parameter DiamondLoupeFacet.facetAddress(bytes4)._functionSelector (contracts/Facet/DiamondLoupeFacet.sol#136) is not in mixedCase
+Parameter DiamondLoupeFacet.supportsInterface(bytes4)._interfaceId (contracts/Facet/DiamondLoupeFacet.sol#142) is not in mixedCase
+Parameter InitFacet.init(address,string,string,uint256)._bPool (contracts/Facet/InitFacet.sol#37) is not in mixedCase
+Parameter InitFacet.init(address,string,string,uint256)._name (contracts/Facet/InitFacet.sol#38) is not in mixedCase
+Parameter InitFacet.init(address,string,string,uint256)._symbol (contracts/Facet/InitFacet.sol#39) is not in mixedCase
+Parameter InitFacet.init(address,string,string,uint256)._initialSupply (contracts/Facet/InitFacet.sol#40) is not in mixedCase
+Parameter PoolEntryFacet.joinPool(uint256)._amount (contracts/Facet/PoolEntryFacet.sol#56) is not in mixedCase
+Parameter PoolEntryFacet.joinPool(uint256,uint256[])._amount (contracts/Facet/PoolEntryFacet.sol#71) is not in mixedCase
+Parameter PoolEntryFacet.joinPool(uint256,uint256[])._maxAmountsIn (contracts/Facet/PoolEntryFacet.sol#71) is not in mixedCase
+Parameter PoolEntryFacet.joinswapExternAmountIn(address,uint256,uint256)._token (contracts/Facet/PoolEntryFacet.sol#88) is not in mixedCase
+Parameter PoolEntryFacet.joinswapExternAmountIn(address,uint256,uint256)._amountIn (contracts/Facet/PoolEntryFacet.sol#89) is not in mixedCase
+Parameter PoolEntryFacet.joinswapExternAmountIn(address,uint256,uint256)._minPoolAmountOut (contracts/Facet/PoolEntryFacet.sol#90) is not in mixedCase
+Parameter PoolEntryFacet.joinswapPoolAmountOut(address,uint256,uint256)._token (contracts/Facet/PoolEntryFacet.sol#110) is not in mixedCase
+Parameter PoolEntryFacet.joinswapPoolAmountOut(address,uint256,uint256)._amountOut (contracts/Facet/PoolEntryFacet.sol#111) is not in mixedCase
+Parameter PoolEntryFacet.joinswapPoolAmountOut(address,uint256,uint256)._maxAmountIn (contracts/Facet/PoolEntryFacet.sol#112) is not in mixedCase
+Parameter PoolExitFacet.exitPoolTakingloss(uint256,address[])._amount (contracts/Facet/PoolExitFacet.sol#58) is not in mixedCase
+Parameter PoolExitFacet.exitPoolTakingloss(uint256,address[])._lossTokens (contracts/Facet/PoolExitFacet.sol#58) is not in mixedCase
+Parameter PoolExitFacet.exitPool(uint256)._amount (contracts/Facet/PoolExitFacet.sol#71) is not in mixedCase
+Parameter PoolExitFacet.exitPool(uint256,uint256[])._amount (contracts/Facet/PoolExitFacet.sol#80) is not in mixedCase
+Parameter PoolExitFacet.exitPool(uint256,uint256[])._minAmountsOut (contracts/Facet/PoolExitFacet.sol#80) is not in mixedCase
+Parameter PoolExitFacet.exitswapPoolAmountIn(address,uint256,uint256)._token (contracts/Facet/PoolExitFacet.sol#96) is not in mixedCase
+Parameter PoolExitFacet.exitswapPoolAmountIn(address,uint256,uint256)._poolAmountIn (contracts/Facet/PoolExitFacet.sol#97) is not in mixedCase
+Parameter PoolExitFacet.exitswapPoolAmountIn(address,uint256,uint256)._minAmountOut (contracts/Facet/PoolExitFacet.sol#98) is not in mixedCase
+Parameter PoolExitFacet.exitswapExternAmountOut(address,uint256,uint256)._token (contracts/Facet/PoolExitFacet.sol#117) is not in mixedCase
+Parameter PoolExitFacet.exitswapExternAmountOut(address,uint256,uint256)._tokenAmountOut (contracts/Facet/PoolExitFacet.sol#118) is not in mixedCase
+Parameter PoolExitFacet.exitswapExternAmountOut(address,uint256,uint256)._maxPoolAmountIn (contracts/Facet/PoolExitFacet.sol#119) is not in mixedCase
+Parameter TokenWeightFacet.updateWeight(address,uint256)._token (contracts/Facet/TokenWeightFacet.sol#59) is not in mixedCase
+Parameter TokenWeightFacet.updateWeight(address,uint256)._newWeight (contracts/Facet/TokenWeightFacet.sol#59) is not in mixedCase
+Parameter TokenWeightFacet.updateWeightsGradually(uint256[],uint256,uint256)._newWeights (contracts/Facet/TokenWeightFacet.sol#74) is not in mixedCase
+Parameter TokenWeightFacet.updateWeightsGradually(uint256[],uint256,uint256)._startBlock (contracts/Facet/TokenWeightFacet.sol#75) is not in mixedCase
+Parameter TokenWeightFacet.updateWeightsGradually(uint256[],uint256,uint256)._endBlock (contracts/Facet/TokenWeightFacet.sol#76) is not in mixedCase
+Parameter TokenWeightFacet.commitAddToken(address,uint256,uint256)._token (contracts/Facet/TokenWeightFacet.sol#102) is not in mixedCase
+Parameter TokenWeightFacet.commitAddToken(address,uint256,uint256)._balance (contracts/Facet/TokenWeightFacet.sol#103) is not in mixedCase
+Parameter TokenWeightFacet.commitAddToken(address,uint256,uint256)._denormalizedWeight (contracts/Facet/TokenWeightFacet.sol#104) is not in mixedCase
+Parameter TokenWeightFacet.removeToken(address)._token (contracts/Facet/TokenWeightFacet.sol#113) is not in mixedCase
+Parameter ViewFacet.calcTokensForAmount(uint256)._amount (contracts/Facet/ViewFacet.sol#68) is not in mixedCase
+Parameter ViewFacet.calcPoolOutGivenSingleIn(address,uint256)._token (contracts/Facet/ViewFacet.sol#82) is not in mixedCase
+Parameter ViewFacet.calcPoolOutGivenSingleIn(address,uint256)._amount (contracts/Facet/ViewFacet.sol#82) is not in mixedCase
+Parameter ViewFacet.calcSingleInGivenPoolOut(address,uint256)._token (contracts/Facet/ViewFacet.sol#96) is not in mixedCase
+Parameter ViewFacet.calcSingleInGivenPoolOut(address,uint256)._amount (contracts/Facet/ViewFacet.sol#96) is not in mixedCase
+Parameter ViewFacet.calcSingleOutGivenPoolIn(address,uint256)._token (contracts/Facet/ViewFacet.sol#110) is not in mixedCase
+Parameter ViewFacet.calcSingleOutGivenPoolIn(address,uint256)._amount (contracts/Facet/ViewFacet.sol#110) is not in mixedCase
+Parameter ViewFacet.calcPoolInGivenSingleOut(address,uint256)._token (contracts/Facet/ViewFacet.sol#124) is not in mixedCase
+Parameter ViewFacet.calcPoolInGivenSingleOut(address,uint256)._amount (contracts/Facet/ViewFacet.sol#124) is not in mixedCase
+Parameter ViewFacet.getDenormalizedWeight(address)._token (contracts/Facet/ViewFacet.sol#200) is not in mixedCase
+Variable Migrations.last_completed_migration (contracts/Migrations.sol#7) is not in mixedCase
+Parameter Ownable.transferOwnership(address)._newOwner (contracts/Ownable.sol#20) is not in mixedCase
+Parameter PCToken.allowance(address,address)._src (contracts/PCToken.sol#63) is not in mixedCase
+Parameter PCToken.allowance(address,address)._dst (contracts/PCToken.sol#63) is not in mixedCase
+Parameter PCToken.balanceOf(address)._whom (contracts/PCToken.sol#67) is not in mixedCase
+Parameter PCToken.approve(address,uint256)._dst (contracts/PCToken.sol#83) is not in mixedCase
+Parameter PCToken.approve(address,uint256)._amount (contracts/PCToken.sol#83) is not in mixedCase
+Parameter PCToken.increaseApproval(address,uint256)._dst (contracts/PCToken.sol#89) is not in mixedCase
+Parameter PCToken.increaseApproval(address,uint256)._amount (contracts/PCToken.sol#89) is not in mixedCase
+Parameter PCToken.decreaseApproval(address,uint256)._dst (contracts/PCToken.sol#96) is not in mixedCase
+Parameter PCToken.decreaseApproval(address,uint256)._amount (contracts/PCToken.sol#96) is not in mixedCase
+Parameter PCToken.transfer(address,uint256)._dst (contracts/PCToken.sol#108) is not in mixedCase
+Parameter PCToken.transfer(address,uint256)._amount (contracts/PCToken.sol#108) is not in mixedCase
+Parameter PCToken.transferFrom(address,address,uint256)._src (contracts/PCToken.sol#114) is not in mixedCase
+Parameter PCToken.transferFrom(address,address,uint256)._dst (contracts/PCToken.sol#115) is not in mixedCase
+Parameter PCToken.transferFrom(address,address,uint256)._amount (contracts/PCToken.sol#116) is not in mixedCase
+Parameter PProxiedFactory.init(address,address)._balancerFactory (contracts/factory/PProxiedFactory.sol#29) is not in mixedCase
+Parameter PProxiedFactory.init(address,address)._implementation (contracts/factory/PProxiedFactory.sol#29) is not in mixedCase
+Parameter PProxiedFactory.setImplementation(address)._implementation (contracts/factory/PProxiedFactory.sol#37) is not in mixedCase
+Parameter PProxiedFactory.newProxiedSmartPool(string,string,uint256,address[],uint256[],uint256[],uint256)._name (contracts/factory/PProxiedFactory.sol#42) is not in mixedCase
+Parameter PProxiedFactory.newProxiedSmartPool(string,string,uint256,address[],uint256[],uint256[],uint256)._symbol (contracts/factory/PProxiedFactory.sol#43) is not in mixedCase
+Parameter PProxiedFactory.newProxiedSmartPool(string,string,uint256,address[],uint256[],uint256[],uint256)._tokens (contracts/factory/PProxiedFactory.sol#45) is not in mixedCase
+Parameter PProxiedFactory.newProxiedSmartPool(string,string,uint256,address[],uint256[],uint256[],uint256)._amounts (contracts/factory/PProxiedFactory.sol#46) is not in mixedCase
+Parameter PProxiedFactory.newProxiedSmartPool(string,string,uint256,address[],uint256[],uint256[],uint256)._weights (contracts/factory/PProxiedFactory.sol#47) is not in mixedCase
+Parameter LibAddRemoveToken.commitAddToken(address,uint256,uint256)._token (contracts/libraries/LibAddRemoveToken.sol#46) is not in mixedCase
+Parameter LibAddRemoveToken.commitAddToken(address,uint256,uint256)._balance (contracts/libraries/LibAddRemoveToken.sol#47) is not in mixedCase
+Parameter LibAddRemoveToken.commitAddToken(address,uint256,uint256)._denormalizedWeight (contracts/libraries/LibAddRemoveToken.sol#48) is not in mixedCase
+Parameter LibAddRemoveToken.removeToken(address)._token (contracts/libraries/LibAddRemoveToken.sol#68) is not in mixedCase
+Parameter LibDiamond.setContractOwner(address)._newOwner (contracts/libraries/LibDiamond.sol#36) is not in mixedCase
+Parameter LibDiamond.diamondCut(IDiamondCut.FacetCut[],address,bytes)._diamondCut (contracts/libraries/LibDiamond.sol#56) is not in mixedCase
+Parameter LibDiamond.diamondCut(IDiamondCut.FacetCut[],address,bytes)._init (contracts/libraries/LibDiamond.sol#57) is not in mixedCase
+Parameter LibDiamond.diamondCut(IDiamondCut.FacetCut[],address,bytes)._calldata (contracts/libraries/LibDiamond.sol#58) is not in mixedCase
+Parameter LibDiamond.addFunctions(address,bytes4[])._facetAddress (contracts/libraries/LibDiamond.sol#76) is not in mixedCase
+Parameter LibDiamond.addFunctions(address,bytes4[])._functionSelectors (contracts/libraries/LibDiamond.sol#76) is not in mixedCase
+Parameter LibDiamond.replaceFunctions(address,bytes4[])._facetAddress (contracts/libraries/LibDiamond.sol#92) is not in mixedCase
+Parameter LibDiamond.replaceFunctions(address,bytes4[])._functionSelectors (contracts/libraries/LibDiamond.sol#92) is not in mixedCase
+Parameter LibDiamond.removeFunctions(address,bytes4[])._facetAddress (contracts/libraries/LibDiamond.sol#109) is not in mixedCase
+Parameter LibDiamond.removeFunctions(address,bytes4[])._functionSelectors (contracts/libraries/LibDiamond.sol#109) is not in mixedCase
+Parameter LibDiamond.initializeDiamondCut(address,bytes)._init (contracts/libraries/LibDiamond.sol#133) is not in mixedCase
+Parameter LibDiamond.initializeDiamondCut(address,bytes)._calldata (contracts/libraries/LibDiamond.sol#133) is not in mixedCase
+Parameter LibDiamond.enforceHasContractCode(address,string)._contract (contracts/libraries/LibDiamond.sol#153) is not in mixedCase
+Parameter LibDiamond.enforceHasContractCode(address,string)._errorMessage (contracts/libraries/LibDiamond.sol#153) is not in mixedCase
+Parameter LibFees.setFeeRecipient(address)._newRecipient (contracts/libraries/LibFees.sol#50) is not in mixedCase
+Parameter LibFees.setAnnualFee(uint256)._newFee (contracts/libraries/LibFees.sol#55) is not in mixedCase
+Event LibPoolEntryExitLOG_EXIT(address,address,uint256) (contracts/libraries/LibPoolEntryExit.sol#16) is not in CapWords
+Parameter LibPoolEntryExit.exitPool(uint256)._amount (contracts/libraries/LibPoolEntryExit.sol#34) is not in mixedCase
+Parameter LibPoolEntryExit.exitPool(uint256,uint256[])._amount (contracts/libraries/LibPoolEntryExit.sol#40) is not in mixedCase
+Parameter LibPoolEntryExit.exitPool(uint256,uint256[])._minAmountsOut (contracts/libraries/LibPoolEntryExit.sol#40) is not in mixedCase
+Parameter LibPoolEntryExit.exitswapPoolAmountIn(address,uint256,uint256)._token (contracts/libraries/LibPoolEntryExit.sol#72) is not in mixedCase
+Parameter LibPoolEntryExit.exitswapPoolAmountIn(address,uint256,uint256)._poolAmountIn (contracts/libraries/LibPoolEntryExit.sol#73) is not in mixedCase
+Parameter LibPoolEntryExit.exitswapPoolAmountIn(address,uint256,uint256)._minAmountOut (contracts/libraries/LibPoolEntryExit.sol#74) is not in mixedCase
+Parameter LibPoolEntryExit.exitswapExternAmountOut(address,uint256,uint256)._token (contracts/libraries/LibPoolEntryExit.sol#107) is not in mixedCase
+Parameter LibPoolEntryExit.exitswapExternAmountOut(address,uint256,uint256)._tokenAmountOut (contracts/libraries/LibPoolEntryExit.sol#108) is not in mixedCase
+Parameter LibPoolEntryExit.exitswapExternAmountOut(address,uint256,uint256)._maxPoolAmountIn (contracts/libraries/LibPoolEntryExit.sol#109) is not in mixedCase
+Parameter LibPoolEntryExit.exitPoolTakingloss(uint256,address[])._amount (contracts/libraries/LibPoolEntryExit.sol#141) is not in mixedCase
+Parameter LibPoolEntryExit.exitPoolTakingloss(uint256,address[])._lossTokens (contracts/libraries/LibPoolEntryExit.sol#141) is not in mixedCase
+Event LibPoolEntryJoinLOG_JOIN(address,address,uint256) (contracts/libraries/LibPoolEntryJoin.sol#16) is not in CapWords
+Parameter LibPoolEntryJoin.joinPool(uint256)._amount (contracts/libraries/LibPoolEntryJoin.sol#32) is not in mixedCase
+Parameter LibPoolEntryJoin.joinPool(uint256,uint256[])._amount (contracts/libraries/LibPoolEntryJoin.sol#41) is not in mixedCase
+Parameter LibPoolEntryJoin.joinPool(uint256,uint256[])._maxAmountsIn (contracts/libraries/LibPoolEntryJoin.sol#41) is not in mixedCase
+Parameter LibPoolEntryJoin.joinswapExternAmountIn(address,uint256,uint256)._token (contracts/libraries/LibPoolEntryJoin.sol#70) is not in mixedCase
+Parameter LibPoolEntryJoin.joinswapExternAmountIn(address,uint256,uint256)._amountIn (contracts/libraries/LibPoolEntryJoin.sol#71) is not in mixedCase
+Parameter LibPoolEntryJoin.joinswapExternAmountIn(address,uint256,uint256)._minPoolAmountOut (contracts/libraries/LibPoolEntryJoin.sol#72) is not in mixedCase
+Parameter LibPoolEntryJoin.joinswapPoolAmountOut(address,uint256,uint256)._token (contracts/libraries/LibPoolEntryJoin.sol#105) is not in mixedCase
+Parameter LibPoolEntryJoin.joinswapPoolAmountOut(address,uint256,uint256)._amountOut (contracts/libraries/LibPoolEntryJoin.sol#106) is not in mixedCase
+Parameter LibPoolEntryJoin.joinswapPoolAmountOut(address,uint256,uint256)._maxAmountIn (contracts/libraries/LibPoolEntryJoin.sol#107) is not in mixedCase
+Parameter LibPoolMath.calcTokensForAmount(uint256)._amount (contracts/libraries/LibPoolMath.sol#268) is not in mixedCase
+Parameter LibPoolMath.calcPoolOutGivenSingleIn(address,uint256)._token (contracts/libraries/LibPoolMath.sol#293) is not in mixedCase
+Parameter LibPoolMath.calcPoolOutGivenSingleIn(address,uint256)._amount (contracts/libraries/LibPoolMath.sol#293) is not in mixedCase
+Parameter LibPoolMath.calcSingleInGivenPoolOut(address,uint256)._token (contracts/libraries/LibPoolMath.sol#323) is not in mixedCase
+Parameter LibPoolMath.calcSingleInGivenPoolOut(address,uint256)._amount (contracts/libraries/LibPoolMath.sol#323) is not in mixedCase
+Parameter LibPoolMath.calcSingleOutGivenPoolIn(address,uint256)._token (contracts/libraries/LibPoolMath.sol#353) is not in mixedCase
+Parameter LibPoolMath.calcSingleOutGivenPoolIn(address,uint256)._amount (contracts/libraries/LibPoolMath.sol#353) is not in mixedCase
+Parameter LibPoolMath.calcPoolInGivenSingleOut(address,uint256)._token (contracts/libraries/LibPoolMath.sol#383) is not in mixedCase
+Parameter LibPoolMath.calcPoolInGivenSingleOut(address,uint256)._amount (contracts/libraries/LibPoolMath.sol#383) is not in mixedCase
+Parameter LibSafeApprove.safeApprove(IERC20,address,uint256)._token (contracts/libraries/LibSafeApprove.sol#8) is not in mixedCase
+Parameter LibSafeApprove.safeApprove(IERC20,address,uint256)._spender (contracts/libraries/LibSafeApprove.sol#8) is not in mixedCase
+Parameter LibSafeApprove.safeApprove(IERC20,address,uint256)._amount (contracts/libraries/LibSafeApprove.sol#8) is not in mixedCase
+Parameter LibWeights.updateWeight(address,uint256)._token (contracts/libraries/LibWeights.sol#15) is not in mixedCase
+Parameter LibWeights.updateWeight(address,uint256)._newWeight (contracts/libraries/LibWeights.sol#15) is not in mixedCase
+Parameter LibWeights.updateWeightsGradually(uint256[],uint256,uint256)._newWeights (contracts/libraries/LibWeights.sol#83) is not in mixedCase
+Parameter LibWeights.updateWeightsGradually(uint256[],uint256,uint256)._startBlock (contracts/libraries/LibWeights.sol#84) is not in mixedCase
+Parameter LibWeights.updateWeightsGradually(uint256[],uint256,uint256)._endBlock (contracts/libraries/LibWeights.sol#85) is not in mixedCase
+Parameter PProxy.setProxyOwner(address)._newOwner (contracts/module/proxy/contracts/PProxy.sol#25) is not in mixedCase
+Parameter PProxy.setImplementation(address)._newImplementation (contracts/module/proxy/contracts/PProxy.sol#33) is not in mixedCase
+Parameter PProxyOverrideable.setOverrides(address)._newOverrides (contracts/module/proxy/contracts/PProxyOverrideable.sol#16) is not in mixedCase
+Parameter PProxyPausable.setPauzer(address)._newPauzer (contracts/module/proxy/contracts/PProxyPausable.sol#30) is not in mixedCase
+Parameter PProxyPausable.setPaused(bool)._value (contracts/module/proxy/contracts/PProxyPausable.sol#42) is not in mixedCase
+Parameter PProxyStorage.readString(bytes32)._key (contracts/module/proxy/contracts/PProxyStorage.sol#7) is not in mixedCase
+Parameter PProxyStorage.setString(bytes32,string)._key (contracts/module/proxy/contracts/PProxyStorage.sol#11) is not in mixedCase
+Parameter PProxyStorage.setString(bytes32,string)._value (contracts/module/proxy/contracts/PProxyStorage.sol#11) is not in mixedCase
+Parameter PProxyStorage.readBool(bytes32)._key (contracts/module/proxy/contracts/PProxyStorage.sol#15) is not in mixedCase
+Parameter PProxyStorage.setBool(bytes32,bool)._key (contracts/module/proxy/contracts/PProxyStorage.sol#19) is not in mixedCase
+Parameter PProxyStorage.setBool(bytes32,bool)._value (contracts/module/proxy/contracts/PProxyStorage.sol#19) is not in mixedCase
+Parameter PProxyStorage.readAddress(bytes32)._key (contracts/module/proxy/contracts/PProxyStorage.sol#27) is not in mixedCase
+Parameter PProxyStorage.setAddress(bytes32,address)._key (contracts/module/proxy/contracts/PProxyStorage.sol#31) is not in mixedCase
+Parameter PProxyStorage.setAddress(bytes32,address)._value (contracts/module/proxy/contracts/PProxyStorage.sol#31) is not in mixedCase
+Parameter PProxyStorage.storageRead(bytes32)._key (contracts/module/proxy/contracts/PProxyStorage.sol#35) is not in mixedCase
+Parameter PProxyStorage.storageSet(bytes32,bytes32)._key (contracts/module/proxy/contracts/PProxyStorage.sol#44) is not in mixedCase
+Parameter PProxyStorage.storageSet(bytes32,bytes32)._value (contracts/module/proxy/contracts/PProxyStorage.sol#44) is not in mixedCase
+Parameter PProxyStorage.bytes32ToAddress(bytes32)._value (contracts/module/proxy/contracts/PProxyStorage.sol#53) is not in mixedCase
+Parameter PProxyStorage.addressToBytes32(address)._value (contracts/module/proxy/contracts/PProxyStorage.sol#57) is not in mixedCase
+Parameter PProxyStorage.stringToBytes32(string)._value (contracts/module/proxy/contracts/PProxyStorage.sol#61) is not in mixedCase
+Parameter PProxyStorage.bytes32ToString(bytes32)._value (contracts/module/proxy/contracts/PProxyStorage.sol#72) is not in mixedCase
+Parameter TestImplementation.setValue1(string)._value (contracts/module/proxy/contracts/test/TestImplementation.sol#11) is not in mixedCase
+Parameter TestImplementation.setValue(string)._value (contracts/module/proxy/contracts/test/TestImplementation.sol#19) is not in mixedCase
+Parameter TestOverrides.doesOverride(bytes4)._selector (contracts/module/proxy/contracts/test/TestOverrides.sol#10) is not in mixedCase
+Parameter PV2SmartPool.setCut(address,address)._diamondCutFacet (contracts/smart-pools/PV2SmartPool.sol#46) is not in mixedCase
+Parameter PV2SmartPool.setCut(address,address)._contractOwner (contracts/smart-pools/PV2SmartPool.sol#46) is not in mixedCase
+Parameter PV2SmartPool.bytes32ToString(bytes32)._bytes32 (contracts/smart-pools/PV2SmartPool.sol#61) is not in mixedCase
+Parameter PV2SmartPool.toByte(uint8)._uint8 (contracts/smart-pools/PV2SmartPool.sol#76) is not in mixedCase
+Constant OwnableStorage.oSlot (contracts/storage/OwnableStorage.sol#6) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant PBasicSmartPoolStorage.pbsSlot (contracts/storage/PBasicSmartPoolStorage.sol#8) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant PCTokenStorage.ptSlot (contracts/storage/PCTokenStorage.sol#6) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant PCappedSmartPoolStorage.pcsSlot (contracts/storage/PCappedSmartPoolStorage.sol#6) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant PV2SmartPoolStorage.pasSlot (contracts/storage/PV2SmartPoolStorage.sol#6) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant ReentryProtectionStorage.rpSlot (contracts/storage/ReentryProtectionStorage.sol#6) is not in UPPER_CASE_WITH_UNDERSCORES
+Parameter TestLibSafeApprove.doubleApprovalUnsafe(address)._token (contracts/test/TestLibSafeApprove.sol#11) is not in mixedCase
+Parameter TestLibSafeApprove.doubleApprovalSafe(address)._token (contracts/test/TestLibSafeApprove.sol#18) is not in mixedCase
+Parameter TestPCToken.mint(address,uint256)._to (contracts/test/TestPCToken.sol#13) is not in mixedCase
+Parameter TestPCToken.mint(address,uint256)._amount (contracts/test/TestPCToken.sol#13) is not in mixedCase
+Parameter TestPCToken.burn(address,uint256)._from (contracts/test/TestPCToken.sol#18) is not in mixedCase
+Parameter TestPCToken.burn(address,uint256)._amount (contracts/test/TestPCToken.sol#18) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions[0m
+[92m
+Variable DiamondLoupeFacet.facetFunctionSelectors(address)._facetFunctionSelectors (contracts/Facet/DiamondLoupeFacet.sol#77) is too similar to IDiamondLoupe.facetFunctionSelectors(address).facetFunctionSelectors_ (contracts/interfaces/IDiamondLoupe.sol#27)
+Variable LibPoolEntryExit.exitswapPoolAmountIn(address,uint256,uint256)._minAmountOut (contracts/libraries/LibPoolEntryExit.sol#74) is too similar to LibPoolEntryExit.exitPool(uint256).minAmountsOut (contracts/libraries/LibPoolEntryExit.sol#36)
+Variable LibPoolEntryJoin.joinswapPoolAmountOut(address,uint256,uint256)._maxAmountIn (contracts/libraries/LibPoolEntryJoin.sol#107) is too similar to LibPoolEntryJoin.joinPool(uint256).maxAmountsIn (contracts/libraries/LibPoolEntryJoin.sol#34)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#variable-names-are-too-similar[0m
+[92m
+TestOverrides.value (contracts/module/proxy/contracts/test/TestOverrides.sol#7) should be constant
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-constant[0m
+[92m
+approveTokens() should be declared external:
+	- InitFacet.approveTokens() (contracts/Facet/InitFacet.sol#61-68)
+setCompleted(uint256) should be declared external:
+	- Migrations.setCompleted(uint256) (contracts/Migrations.sol#17-19)
+totalSupply() should be declared external:
+	- PCToken.totalSupply() (contracts/PCToken.sol#71-73)
+init(address,address) should be declared external:
+	- PProxiedFactory.init(address,address) (contracts/factory/PProxiedFactory.sol#29-35)
+newProxiedSmartPool(string,string,uint256,address[],uint256[],uint256[],uint256) should be declared external:
+	- PProxiedFactory.newProxiedSmartPool(string,string,uint256,address[],uint256[],uint256[],uint256) (contracts/factory/PProxiedFactory.sol#41-100)
+getProxyOwner() should be declared external:
+	- PProxy.getProxyOwner() (contracts/module/proxy/contracts/PProxy.sol#21-23)
+setProxyOwner(address) should be declared external:
+	- PProxy.setProxyOwner(address) (contracts/module/proxy/contracts/PProxy.sol#25-27)
+getImplementation() should be declared external:
+	- PProxy.getImplementation() (contracts/module/proxy/contracts/PProxy.sol#29-31)
+setImplementation(address) should be declared external:
+	- PProxy.setImplementation(address) (contracts/module/proxy/contracts/PProxy.sol#33-35)
+getOverrides() should be declared external:
+	- PProxyOverrideable.getOverrides() (contracts/module/proxy/contracts/PProxyOverrideable.sol#12-14)
+setOverrides(address) should be declared external:
+	- PProxyOverrideable.setOverrides(address) (contracts/module/proxy/contracts/PProxyOverrideable.sol#16-18)
+getPauzer() should be declared external:
+	- PProxyPausable.getPauzer() (contracts/module/proxy/contracts/PProxyPausable.sol#26-28)
+setPauzer(address) should be declared external:
+	- PProxyPausable.setPauzer(address) (contracts/module/proxy/contracts/PProxyPausable.sol#30-32)
+renouncePauzer() should be declared external:
+	- PProxyPausable.renouncePauzer() (contracts/module/proxy/contracts/PProxyPausable.sol#34-36)
+getPaused() should be declared external:
+	- PProxyPausable.getPaused() (contracts/module/proxy/contracts/PProxyPausable.sol#38-40)
+setPaused(bool) should be declared external:
+	- PProxyPausable.setPaused(bool) (contracts/module/proxy/contracts/PProxyPausable.sol#42-44)
+readString(bytes32) should be declared external:
+	- PProxyStorage.readString(bytes32) (contracts/module/proxy/contracts/PProxyStorage.sol#7-9)
+getValue1() should be declared external:
+	- TestImplementation.getValue1() (contracts/module/proxy/contracts/test/TestImplementation.sol#15-17)
+getValue() should be declared external:
+	- TestImplementation.getValue() (contracts/module/proxy/contracts/test/TestImplementation.sol#23-25)
+doesOverride(bytes4) should be declared external:
+	- TestOverrides.doesOverride(bytes4) (contracts/module/proxy/contracts/test/TestOverrides.sol#10-20)
+name() should be declared external:
+	- TestOverrides.name() (contracts/module/proxy/contracts/test/TestOverrides.sol#22-24)
+symbol() should be declared external:
+	- TestOverrides.symbol() (contracts/module/proxy/contracts/test/TestOverrides.sol#26-28)
+setValue1() should be declared external:
+	- TestOverrides.setValue1() (contracts/module/proxy/contracts/test/TestOverrides.sol#30-32)
+setCut(address,address) should be declared external:
+	- PV2SmartPool.setCut(address,address) (contracts/smart-pools/PV2SmartPool.sol#46-59)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#public-function-that-could-be-declared-external[0m
+. analyzed (52 contracts with 77 detectors), 332 result(s) found
