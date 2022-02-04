@@ -1,0 +1,132 @@
+[93m
+PancakePredictionV2._calculateRewards(uint256) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1177-1209) uses a dangerous strict equality:
+	- require(bool,string)(rounds[epoch].rewardBaseCalAmount == 0 && rounds[epoch].rewardAmount == 0,Rewards calculated) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1178)
+PancakePredictionV2.claimable(uint256,address) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1144-1156) uses a dangerous strict equality:
+	- round.lockPrice == round.closePrice (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1147)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dangerous-strict-equalities[0m
+[93m
+PancakePredictionV2.setOracle(address) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1040-1049) ignores return value by oracle.latestRoundData() (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1046)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unused-return[0m
+[92m
+PancakePredictionV2.constructor(address,address,address,uint256,uint256,uint256,uint256,uint256)._adminAddress (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#803) lacks a zero-check on :
+		- adminAddress = _adminAddress (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#814)
+PancakePredictionV2.constructor(address,address,address,uint256,uint256,uint256,uint256,uint256)._operatorAddress (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#804) lacks a zero-check on :
+		- operatorAddress = _operatorAddress (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#815)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation[0m
+[92m
+Reentrancy in PancakePredictionV2.claimTreasury() (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#978-984):
+	External calls:
+	- _safeTransferBNB(adminAddress,currentTreasuryAmount) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#981)
+		- (success) = to.call{value: value}() (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1282)
+	Event emitted after the call(s):
+	- TreasuryClaim(currentTreasuryAmount) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#983)
+Reentrancy in PancakePredictionV2.recoverToken(address,uint256) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1078-1082):
+	External calls:
+	- IERC20(_token).safeTransfer(address(msg.sender),_amount) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1079)
+	Event emitted after the call(s):
+	- TokenRecovery(_token,_amount) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1081)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-3[0m
+[92m
+PancakePredictionV2.claim(uint256[]) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#877-907) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(rounds[epochs[i]].startTimestamp != 0,Round has not started) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#881)
+	- require(bool,string)(block.timestamp > rounds[epochs[i]].closeTimestamp,Round has not ended) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#882)
+	- reward > 0 (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#904)
+PancakePredictionV2.claimable(uint256,address) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1144-1156) uses timestamp for comparisons
+	Dangerous comparisons:
+	- round.lockPrice == round.closePrice (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1147)
+	- round.oracleCalled && betInfo.amount != 0 && ! betInfo.claimed && ((round.closePrice > round.lockPrice && betInfo.position == Position.Bull) || (round.closePrice < round.lockPrice && betInfo.position == Position.Bear)) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1150-1155)
+PancakePredictionV2.refundable(uint256,address) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1163-1171) uses timestamp for comparisons
+	Dangerous comparisons:
+	- ! round.oracleCalled && ! betInfo.claimed && block.timestamp > round.closeTimestamp + bufferSeconds && betInfo.amount != 0 (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1166-1170)
+PancakePredictionV2._calculateRewards(uint256) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1177-1209) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(rounds[epoch].rewardBaseCalAmount == 0 && rounds[epoch].rewardAmount == 0,Rewards calculated) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1178)
+PancakePredictionV2._safeEndRound(uint256,uint256,int256) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1217-1234) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(rounds[epoch].lockTimestamp != 0,Can only end round after round has locked) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1222)
+	- require(bool,string)(block.timestamp >= rounds[epoch].closeTimestamp,Can only end round after closeTimestamp) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1223)
+	- require(bool,string)(block.timestamp <= rounds[epoch].closeTimestamp + bufferSeconds,Can only end round within bufferSeconds) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1224-1227)
+PancakePredictionV2._safeLockRound(uint256,uint256,int256) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1242-1259) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(rounds[epoch].startTimestamp != 0,Can only lock round after round has started) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1247)
+	- require(bool,string)(block.timestamp >= rounds[epoch].lockTimestamp,Can only lock round after lockTimestamp) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1248)
+	- require(bool,string)(block.timestamp <= rounds[epoch].lockTimestamp + bufferSeconds,Can only lock round within bufferSeconds) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1249-1252)
+PancakePredictionV2._safeStartRound(uint256) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1266-1274) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(rounds[epoch - 2].closeTimestamp != 0,Can only start round after round n-2 has ended) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1268)
+	- require(bool,string)(block.timestamp >= rounds[epoch - 2].closeTimestamp,Can only start new round after round n-2 closeTimestamp) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1269-1272)
+PancakePredictionV2._safeTransferBNB(address,uint256) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1281-1284) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(success,TransferHelper: BNB_TRANSFER_FAILED) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1283)
+PancakePredictionV2._bettable(uint256) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1307-1313) uses timestamp for comparisons
+	Dangerous comparisons:
+	- rounds[epoch].startTimestamp != 0 && rounds[epoch].lockTimestamp != 0 && block.timestamp > rounds[epoch].startTimestamp && block.timestamp < rounds[epoch].lockTimestamp (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1308-1312)
+PancakePredictionV2._getPriceFromOracle() (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1319-1328) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(timestamp <= leastAllowedTimestamp,Oracle update exceeded max timestamp allowance) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1322)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp[0m
+[92m
+Address.isContract(address) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#344-354) uses assembly
+	- INLINE ASM (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#350-352)
+Address._verifyCallResult(bool,bytes,string) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#507-527) uses assembly
+	- INLINE ASM (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#519-522)
+PancakePredictionV2._isContract(address) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1334-1340) uses assembly
+	- INLINE ASM (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1336-1338)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#assembly-usage[0m
+[92m
+Address.functionCall(address,bytes) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#397-399) is never used and should be removed
+Address.functionCallWithValue(address,bytes,uint256) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#426-432) is never used and should be removed
+Address.functionDelegateCall(address,bytes) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#486-488) is never used and should be removed
+Address.functionDelegateCall(address,bytes,string) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#496-505) is never used and should be removed
+Address.functionStaticCall(address,bytes) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#459-461) is never used and should be removed
+Address.functionStaticCall(address,bytes,string) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#469-478) is never used and should be removed
+Address.sendValue(address,uint256) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#372-377) is never used and should be removed
+Context._msgData() (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#20-22) is never used and should be removed
+SafeERC20.safeApprove(IERC20,address,uint256) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#569-582) is never used and should be removed
+SafeERC20.safeDecreaseAllowance(IERC20,address,uint256) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#593-604) is never used and should be removed
+SafeERC20.safeIncreaseAllowance(IERC20,address,uint256) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#584-591) is never used and should be removed
+SafeERC20.safeTransferFrom(IERC20,address,address,uint256) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#553-560) is never used and should be removed
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dead-code[0m
+[92m
+Pragma version^0.8.0 (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#3) allows old versions
+Pragma version^0.8.0 (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#25) allows old versions
+Pragma version^0.8.0 (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#93) allows old versions
+Pragma version^0.8.0 (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#180) allows old versions
+Pragma version^0.8.0 (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#241) allows old versions
+Pragma version^0.8.0 (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#321) allows old versions
+Pragma version^0.8.0 (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#530) allows old versions
+Pragma version^0.8.0 (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#625) allows old versions
+Pragma version^0.8.0 (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#679) allows old versions
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity[0m
+[92m
+Low level call in Address.sendValue(address,uint256) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#372-377):
+	- (success) = recipient.call{value: amount}() (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#375)
+Low level call in Address.functionCallWithValue(address,bytes,uint256,string) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#440-451):
+	- (success,returndata) = target.call{value: value}(data) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#449)
+Low level call in Address.functionStaticCall(address,bytes,string) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#469-478):
+	- (success,returndata) = target.staticcall(data) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#476)
+Low level call in Address.functionDelegateCall(address,bytes,string) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#496-505):
+	- (success,returndata) = target.delegatecall(data) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#503)
+Low level call in PancakePredictionV2._safeTransferBNB(address,uint256) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1281-1284):
+	- (success) = to.call{value: value}() (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1282)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls[0m
+[92m
+Parameter PancakePredictionV2.setBufferAndIntervalSeconds(uint256,uint256)._bufferSeconds (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1002) is not in mixedCase
+Parameter PancakePredictionV2.setBufferAndIntervalSeconds(uint256,uint256)._intervalSeconds (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1002) is not in mixedCase
+Parameter PancakePredictionV2.setMinBetAmount(uint256)._minBetAmount (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1018) is not in mixedCase
+Parameter PancakePredictionV2.setOperator(address)._operatorAddress (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1029) is not in mixedCase
+Parameter PancakePredictionV2.setOracle(address)._oracle (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1040) is not in mixedCase
+Parameter PancakePredictionV2.setOracleUpdateAllowance(uint256)._oracleUpdateAllowance (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1055) is not in mixedCase
+Parameter PancakePredictionV2.setTreasuryFee(uint256)._treasuryFee (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1065) is not in mixedCase
+Parameter PancakePredictionV2.recoverToken(address,uint256)._token (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1078) is not in mixedCase
+Parameter PancakePredictionV2.recoverToken(address,uint256)._amount (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1078) is not in mixedCase
+Parameter PancakePredictionV2.setAdmin(address)._adminAddress (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#1088) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions[0m
+[92m
+renounceOwnership() should be declared external:
+	- Ownable.renounceOwnership() (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#73-75)
+transferOwnership(address) should be declared external:
+	- Ownable.transferOwnership(address) (crytic-export/etherscan-contracts/0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA.bscscan.com-PancakePredictionV2.sol#81-84)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#public-function-that-could-be-declared-external[0m
+bsc:0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA analyzed (9 contracts with 77 detectors), 58 result(s) found
