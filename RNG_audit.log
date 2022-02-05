@@ -1,0 +1,52 @@
+[92m
+Different versions of Solidity is used:
+	- Version used: ['>=0.6.0', '^0.6.0', '^0.6.6']
+	- ^0.6.0 (@openzeppelin/contracts/GSN/Context.sol#3)
+	- ^0.6.0 (@openzeppelin/contracts/access/Ownable.sol#3)
+	- ^0.6.0 (@openzeppelin/contracts/math/SafeMath.sol#3)
+	- ^0.6.0 (@openzeppelin/contracts/utils/SafeCast.sol#3)
+	- ^0.6.6 (contracts/RNGBlockhash.sol#3)
+	- >=0.6.0 (contracts/RNGInterface.sol#3)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#different-pragma-directives-are-used[0m
+[92m
+Context._msgData() (@openzeppelin/contracts/GSN/Context.sol#20-23) is never used and should be removed
+SafeCast.toInt128(int256) (@openzeppelin/contracts/utils/SafeCast.sol#123-126) is never used and should be removed
+SafeCast.toInt16(int256) (@openzeppelin/contracts/utils/SafeCast.sol#177-180) is never used and should be removed
+SafeCast.toInt256(uint256) (@openzeppelin/contracts/utils/SafeCast.sol#207-210) is never used and should be removed
+SafeCast.toInt32(int256) (@openzeppelin/contracts/utils/SafeCast.sol#159-162) is never used and should be removed
+SafeCast.toInt64(int256) (@openzeppelin/contracts/utils/SafeCast.sol#141-144) is never used and should be removed
+SafeCast.toInt8(int256) (@openzeppelin/contracts/utils/SafeCast.sol#195-198) is never used and should be removed
+SafeCast.toUint128(uint256) (@openzeppelin/contracts/utils/SafeCast.sol#33-36) is never used and should be removed
+SafeCast.toUint16(uint256) (@openzeppelin/contracts/utils/SafeCast.sol#78-81) is never used and should be removed
+SafeCast.toUint256(int256) (@openzeppelin/contracts/utils/SafeCast.sol#105-108) is never used and should be removed
+SafeCast.toUint64(uint256) (@openzeppelin/contracts/utils/SafeCast.sol#48-51) is never used and should be removed
+SafeCast.toUint8(uint256) (@openzeppelin/contracts/utils/SafeCast.sol#93-96) is never used and should be removed
+SafeMath.div(uint256,uint256) (@openzeppelin/contracts/math/SafeMath.sol#103-105) is never used and should be removed
+SafeMath.div(uint256,uint256,string) (@openzeppelin/contracts/math/SafeMath.sol#119-125) is never used and should be removed
+SafeMath.mod(uint256,uint256) (@openzeppelin/contracts/math/SafeMath.sol#139-141) is never used and should be removed
+SafeMath.mod(uint256,uint256,string) (@openzeppelin/contracts/math/SafeMath.sol#155-158) is never used and should be removed
+SafeMath.mul(uint256,uint256) (@openzeppelin/contracts/math/SafeMath.sol#77-89) is never used and should be removed
+SafeMath.sub(uint256,uint256) (@openzeppelin/contracts/math/SafeMath.sol#46-48) is never used and should be removed
+SafeMath.sub(uint256,uint256,string) (@openzeppelin/contracts/math/SafeMath.sol#60-65) is never used and should be removed
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dead-code[0m
+[92m
+Pragma version^0.6.0 (@openzeppelin/contracts/GSN/Context.sol#3) allows old versions
+Pragma version^0.6.0 (@openzeppelin/contracts/access/Ownable.sol#3) allows old versions
+Pragma version^0.6.0 (@openzeppelin/contracts/math/SafeMath.sol#3) allows old versions
+Pragma version^0.6.0 (@openzeppelin/contracts/utils/SafeCast.sol#3) allows old versions
+Pragma version^0.6.6 (contracts/RNGBlockhash.sol#3) allows old versions
+Pragma version>=0.6.0 (contracts/RNGInterface.sol#3) allows old versions
+solc-0.6.6 is not recommended for deployment
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity[0m
+[92m
+Redundant expression "this (@openzeppelin/contracts/GSN/Context.sol#21)" inContext (@openzeppelin/contracts/GSN/Context.sol#15-24)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#redundant-statements[0m
+[92m
+owner() should be declared external:
+	- Ownable.owner() (@openzeppelin/contracts/access/Ownable.sol#35-37)
+renounceOwnership() should be declared external:
+	- Ownable.renounceOwnership() (@openzeppelin/contracts/access/Ownable.sol#54-57)
+transferOwnership(address) should be declared external:
+	- Ownable.transferOwnership(address) (@openzeppelin/contracts/access/Ownable.sol#63-67)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#public-function-that-could-be-declared-external[0m
+bsc:0xb1D89477d1b505C261bab6e73f08fA834544CD21 analyzed (6 contracts with 77 detectors), 31 result(s) found

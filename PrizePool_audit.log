@@ -1,0 +1,413 @@
+Warning: @pooltogether/fixed-point/contracts/FixedPoint.sol: Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+
+Warning: contracts/token/TokenListenerLibrary.sol: Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+
+Warning: contracts/prize-pool/PrizePool.sol:858:5: Warning: This declaration shadows an existing declaration.
+    ControlledTokenInterface[] memory tokens = _tokens; // SLOAD  
+    ^--------------------------------------^
+contracts/prize-pool/PrizePool.sol:820:3: The shadowed declaration is here:
+  function tokens() external override view returns (ControlledTokenInterface[] memory) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: contracts/prize-pool/PrizePool.sol:880:5: Warning: This declaration shadows an existing declaration.
+    ControlledTokenInterface[] memory tokens = _tokens; // SLOAD
+    ^--------------------------------------^
+contracts/prize-pool/PrizePool.sol:820:3: The shadowed declaration is here:
+  function tokens() external override view returns (ControlledTokenInterface[] memory) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: @openzeppelin/contracts-upgradeable/drafts/ERC20PermitUpgradeable.sol:41:43: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function __ERC20Permit_init_unchained(string memory name) internal initializer {
+                                          ^----------------^
+
+Warning: contracts/prize-pool/PrizePool.sol:850:29: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  function onERC721Received(address operator, address from, uint256 tokenId, bytes calldata data) external override returns (bytes4){
+                            ^--------------^
+
+Warning: contracts/prize-pool/PrizePool.sol:850:47: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  function onERC721Received(address operator, address from, uint256 tokenId, bytes calldata data) external override returns (bytes4){
+                                              ^----------^
+
+Warning: contracts/prize-pool/PrizePool.sol:850:61: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  function onERC721Received(address operator, address from, uint256 tokenId, bytes calldata data) external override returns (bytes4){
+                                                            ^-------------^
+
+Warning: contracts/prize-pool/PrizePool.sol:850:78: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  function onERC721Received(address operator, address from, uint256 tokenId, bytes calldata data) external override returns (bytes4){
+                                                                             ^-----------------^
+
+
+[91m
+OwnableUpgradeable.__gap (@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol#74) shadows:
+	- ContextUpgradeable.__gap (@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol#31)
+ERC20PermitUpgradeable.__gap (@openzeppelin/contracts-upgradeable/drafts/ERC20PermitUpgradeable.sol#86) shadows:
+	- EIP712Upgradeable.__gap (@openzeppelin/contracts-upgradeable/drafts/EIP712Upgradeable.sol#120)
+	- ERC20Upgradeable.__gap (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#312)
+	- ContextUpgradeable.__gap (@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol#31)
+ERC20Upgradeable.__gap (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#312) shadows:
+	- ContextUpgradeable.__gap (@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol#31)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variable-shadowing[0m
+[93m
+PrizePool.awardExternalERC721(address,address,uint256[]).error (contracts/prize-pool/PrizePool.sol#509) is a local variable never initialized
+PrizePool._calculateEarlyExitFeeLessBurnedCredit(address,address,uint256).availableCredit (contracts/prize-pool/PrizePool.sol#770) is a local variable never initialized
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#uninitialized-local-variables[0m
+[92m
+ERC20PermitUpgradeable.__ERC20Permit_init(string).name (@openzeppelin/contracts-upgradeable/drafts/ERC20PermitUpgradeable.sol#35) shadows:
+	- ERC20Upgradeable.name() (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#70-72) (function)
+ERC20PermitUpgradeable.__ERC20Permit_init_unchained(string).name (@openzeppelin/contracts-upgradeable/drafts/ERC20PermitUpgradeable.sol#41) shadows:
+	- ERC20Upgradeable.name() (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#70-72) (function)
+PrizePool._tokenTotalSupply().tokens (contracts/prize-pool/PrizePool.sol#858) shadows:
+	- PrizePool.tokens() (contracts/prize-pool/PrizePool.sol#820-822) (function)
+	- PrizePoolInterface.tokens() (contracts/prize-pool/PrizePoolInterface.sol#174) (function)
+PrizePool._isControlled(ControlledTokenInterface).tokens (contracts/prize-pool/PrizePool.sol#880) shadows:
+	- PrizePool.tokens() (contracts/prize-pool/PrizePool.sol#820-822) (function)
+	- PrizePoolInterface.tokens() (contracts/prize-pool/PrizePoolInterface.sol#174) (function)
+ControlledToken.initialize(string,string,uint8,TokenControllerInterface)._name (contracts/token/ControlledToken.sol#31) shadows:
+	- ERC20Upgradeable._name (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#43) (state variable)
+ControlledToken.initialize(string,string,uint8,TokenControllerInterface)._symbol (contracts/token/ControlledToken.sol#32) shadows:
+	- ERC20Upgradeable._symbol (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#44) (state variable)
+ControlledToken.initialize(string,string,uint8,TokenControllerInterface)._decimals (contracts/token/ControlledToken.sol#33) shadows:
+	- ERC20Upgradeable._decimals (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#45) (state variable)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#local-variable-shadowing[0m
+[92m
+PrizePool._addControlledToken(ControlledTokenInterface,uint256) (contracts/prize-pool/PrizePool.sol#795-800) has external calls inside a loop: require(bool,string)(_controlledToken.controller() == this,PrizePool/token-ctrlr-mismatch) (contracts/prize-pool/PrizePool.sol#796)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation/#calls-inside-a-loop[0m
+[92m
+Variable 'PrizePool.awardExternalERC721(address,address,uint256[]).error (contracts/prize-pool/PrizePool.sol#509)' in PrizePool.awardExternalERC721(address,address,uint256[]) (contracts/prize-pool/PrizePool.sol#491-516) potentially used before declaration: ErrorAwardingExternalERC721(error) (contracts/prize-pool/PrizePool.sol#510)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#pre-declaration-usage-of-local-variables[0m
+[92m
+Reentrancy in PrizePool._setPrizeStrategy(TokenListenerInterface) (contracts/prize-pool/PrizePool.sol#810-816):
+	External calls:
+	- require(bool,string)(address(_prizeStrategy).supportsInterface(TokenListenerLibrary.ERC165_INTERFACE_ID_TOKEN_LISTENER),PrizePool/prizeStrategy-invalid) (contracts/prize-pool/PrizePool.sol#812)
+	State variables written after the call(s):
+	- prizeStrategy = _prizeStrategy (contracts/prize-pool/PrizePool.sol#813)
+Reentrancy in PrizePool.award(address,uint256,address) (contracts/prize-pool/PrizePool.sol#395-417):
+	External calls:
+	- _mint(to,amount,controlledToken,address(0)) (contracts/prize-pool/PrizePool.sol#411)
+		- prizeStrategy.beforeTokenMint(to,amount,controlledToken,referrer) (contracts/prize-pool/PrizePool.sol#481)
+		- ControlledToken(controlledToken).controllerMint(to,amount) (contracts/prize-pool/PrizePool.sol#483)
+	State variables written after the call(s):
+	- _accrueCredit(to,controlledToken,IERC20Upgradeable(controlledToken).balanceOf(to),extraCredit) (contracts/prize-pool/PrizePool.sol#414)
+		- _tokenCreditBalances[controlledToken][user] = CreditBalance(newBalance.toUint128(),_currentTime().toUint32(),true) (contracts/prize-pool/PrizePool.sol#642-646)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-2[0m
+[92m
+Reentrancy in PrizePool._setPrizeStrategy(TokenListenerInterface) (contracts/prize-pool/PrizePool.sol#810-816):
+	External calls:
+	- require(bool,string)(address(_prizeStrategy).supportsInterface(TokenListenerLibrary.ERC165_INTERFACE_ID_TOKEN_LISTENER),PrizePool/prizeStrategy-invalid) (contracts/prize-pool/PrizePool.sol#812)
+	Event emitted after the call(s):
+	- PrizeStrategySet(address(_prizeStrategy)) (contracts/prize-pool/PrizePool.sol#815)
+Reentrancy in PrizePool.award(address,uint256,address) (contracts/prize-pool/PrizePool.sol#395-417):
+	External calls:
+	- _mint(to,amount,controlledToken,address(0)) (contracts/prize-pool/PrizePool.sol#411)
+		- prizeStrategy.beforeTokenMint(to,amount,controlledToken,referrer) (contracts/prize-pool/PrizePool.sol#481)
+		- ControlledToken(controlledToken).controllerMint(to,amount) (contracts/prize-pool/PrizePool.sol#483)
+	Event emitted after the call(s):
+	- Awarded(to,controlledToken,amount) (contracts/prize-pool/PrizePool.sol#416)
+	- CreditBurned(user,controlledToken,oldBalance.sub(newBalance)) (contracts/prize-pool/PrizePool.sol#652)
+		- _accrueCredit(to,controlledToken,IERC20Upgradeable(controlledToken).balanceOf(to),extraCredit) (contracts/prize-pool/PrizePool.sol#414)
+	- CreditMinted(user,controlledToken,newBalance.sub(oldBalance)) (contracts/prize-pool/PrizePool.sol#649)
+		- _accrueCredit(to,controlledToken,IERC20Upgradeable(controlledToken).balanceOf(to),extraCredit) (contracts/prize-pool/PrizePool.sol#414)
+Reentrancy in PrizePool.awardExternalERC20(address,address,uint256) (contracts/prize-pool/PrizePool.sol#442-453):
+	External calls:
+	- _transferOut(to,externalToken,amount) (contracts/prize-pool/PrizePool.sol#450)
+		- returndata = address(token).functionCall(data,SafeERC20: low-level call failed) (@openzeppelin/contracts-upgradeable/token/ERC20/SafeERC20Upgradeable.sol#69)
+		- (success,returndata) = target.call{value: value}(data) (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#119)
+		- IERC20Upgradeable(externalToken).safeTransfer(to,amount) (contracts/prize-pool/PrizePool.sol#469)
+	External calls sending eth:
+	- _transferOut(to,externalToken,amount) (contracts/prize-pool/PrizePool.sol#450)
+		- (success,returndata) = target.call{value: value}(data) (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#119)
+	Event emitted after the call(s):
+	- AwardedExternalERC20(to,externalToken,amount) (contracts/prize-pool/PrizePool.sol#451)
+Reentrancy in PrizePool.awardExternalERC721(address,address,uint256[]) (contracts/prize-pool/PrizePool.sol#491-516):
+	External calls:
+	- IERC721Upgradeable(externalToken).safeTransferFrom(address(this),to,tokenIds[i]) (contracts/prize-pool/PrizePool.sol#506-511)
+	Event emitted after the call(s):
+	- ErrorAwardingExternalERC721(error) (contracts/prize-pool/PrizePool.sol#510)
+Reentrancy in PrizePool.depositTo(address,uint256,address,address) (contracts/prize-pool/PrizePool.sol#248-267):
+	External calls:
+	- _mint(to,amount,controlledToken,referrer) (contracts/prize-pool/PrizePool.sol#261)
+		- prizeStrategy.beforeTokenMint(to,amount,controlledToken,referrer) (contracts/prize-pool/PrizePool.sol#481)
+		- ControlledToken(controlledToken).controllerMint(to,amount) (contracts/prize-pool/PrizePool.sol#483)
+	- _token().safeTransferFrom(operator,address(this),amount) (contracts/prize-pool/PrizePool.sol#263)
+	Event emitted after the call(s):
+	- Deposited(operator,to,controlledToken,amount,referrer) (contracts/prize-pool/PrizePool.sol#266)
+Reentrancy in PrizePool.transferExternalERC20(address,address,uint256) (contracts/prize-pool/PrizePool.sol#424-435):
+	External calls:
+	- _transferOut(to,externalToken,amount) (contracts/prize-pool/PrizePool.sol#432)
+		- returndata = address(token).functionCall(data,SafeERC20: low-level call failed) (@openzeppelin/contracts-upgradeable/token/ERC20/SafeERC20Upgradeable.sol#69)
+		- (success,returndata) = target.call{value: value}(data) (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#119)
+		- IERC20Upgradeable(externalToken).safeTransfer(to,amount) (contracts/prize-pool/PrizePool.sol#469)
+	External calls sending eth:
+	- _transferOut(to,externalToken,amount) (contracts/prize-pool/PrizePool.sol#432)
+		- (success,returndata) = target.call{value: value}(data) (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#119)
+	Event emitted after the call(s):
+	- TransferredExternalERC20(to,externalToken,amount) (contracts/prize-pool/PrizePool.sol#433)
+Reentrancy in PrizePool.withdrawInstantlyFrom(address,uint256,address,uint256) (contracts/prize-pool/PrizePool.sol#275-304):
+	External calls:
+	- ControlledToken(controlledToken).controllerBurnFrom(_msgSender(),from,amount) (contracts/prize-pool/PrizePool.sol#293)
+	- _token().safeTransfer(from,redeemed) (contracts/prize-pool/PrizePool.sol#299)
+	Event emitted after the call(s):
+	- InstantWithdrawal(_msgSender(),from,controlledToken,amount,redeemed,exitFee) (contracts/prize-pool/PrizePool.sol#301)
+Reentrancy in PrizePool.withdrawReserve(address) (contracts/prize-pool/PrizePool.sol#377-388):
+	External calls:
+	- _token().safeTransfer(address(to),redeemed) (contracts/prize-pool/PrizePool.sol#383)
+	Event emitted after the call(s):
+	- ReserveWithdrawal(to,amount) (contracts/prize-pool/PrizePool.sol#385)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-3[0m
+[92m
+ERC20PermitUpgradeable.permit(address,address,uint256,uint256,uint8,bytes32,bytes32) (@openzeppelin/contracts-upgradeable/drafts/ERC20PermitUpgradeable.sol#48-70) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp <= deadline,ERC20Permit: expired deadline) (@openzeppelin/contracts-upgradeable/drafts/ERC20PermitUpgradeable.sol#50)
+PrizePool._updateCreditBalance(address,address,uint256) (contracts/prize-pool/PrizePool.sol#639-654) uses timestamp for comparisons
+	Dangerous comparisons:
+	- oldBalance < newBalance (contracts/prize-pool/PrizePool.sol#648)
+	- newBalance < oldBalance (contracts/prize-pool/PrizePool.sol#651)
+PrizePool._applyCreditLimit(address,uint256,uint256) (contracts/prize-pool/PrizePool.sol#661-671) uses timestamp for comparisons
+	Dangerous comparisons:
+	- creditBalance > creditLimit (contracts/prize-pool/PrizePool.sol#666)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp[0m
+[92m
+ECDSAUpgradeable.recover(bytes32,bytes) (@openzeppelin/contracts-upgradeable/cryptography/ECDSAUpgradeable.sol#26-47) uses assembly
+	- INLINE ASM (@openzeppelin/contracts-upgradeable/cryptography/ECDSAUpgradeable.sol#40-44)
+EIP712Upgradeable._getChainId() (@openzeppelin/contracts-upgradeable/drafts/EIP712Upgradeable.sol#93-99) uses assembly
+	- INLINE ASM (@openzeppelin/contracts-upgradeable/drafts/EIP712Upgradeable.sol#96-98)
+AddressUpgradeable.isContract(address) (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#26-35) uses assembly
+	- INLINE ASM (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#33)
+AddressUpgradeable._verifyCallResult(bool,bytes,string) (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#147-164) uses assembly
+	- INLINE ASM (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#156-159)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#assembly-usage[0m
+[92m
+Different versions of Solidity is used:
+	- Version used: ['0.6.12', '>=0.4.24<0.8.0', '>=0.5.0<0.7.0', '>=0.6.0<0.8.0', '>=0.6.2<0.8.0', '>=0.6.5<0.8.0']
+	- >=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol#3)
+	- >=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/cryptography/ECDSAUpgradeable.sol#3)
+	- >=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/drafts/EIP712Upgradeable.sol#3)
+	- >=0.6.5<0.8.0 (@openzeppelin/contracts-upgradeable/drafts/ERC20PermitUpgradeable.sol#3)
+	- >=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/drafts/IERC20PermitUpgradeable.sol#3)
+	- >=0.6.2<0.8.0 (@openzeppelin/contracts-upgradeable/introspection/ERC165CheckerUpgradeable.sol#3)
+	- >=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/introspection/IERC165Upgradeable.sol#3)
+	- >=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol#3)
+	- >=0.4.24<0.8.0 (@openzeppelin/contracts-upgradeable/proxy/Initializable.sol#4)
+	- >=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#3)
+	- >=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol#3)
+	- >=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/token/ERC20/SafeERC20Upgradeable.sol#3)
+	- >=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/token/ERC721/IERC721ReceiverUpgradeable.sol#3)
+	- >=0.6.2<0.8.0 (@openzeppelin/contracts-upgradeable/token/ERC721/IERC721Upgradeable.sol#3)
+	- >=0.6.2<0.8.0 (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#3)
+	- >=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol#3)
+	- >=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol#3)
+	- >=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol#3)
+	- >=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/utils/SafeCastUpgradeable.sol#3)
+	- >=0.6.0<0.8.0 (@pooltogether/fixed-point/contracts/FixedPoint.sol#19)
+	- >=0.6.0<0.8.0 (@pooltogether/fixed-point/contracts/external/openzeppelin/OpenZeppelinSafeMath_V3_3_0.sol#5)
+	- 0.6.12 (contracts/external/compound/ICompLike.sol#3)
+	- 0.6.12 (contracts/prize-pool/PrizePool.sol#3)
+	- 0.6.12 (contracts/prize-pool/PrizePoolInterface.sol#3)
+	- 0.6.12 (contracts/prize-pool/stake/StakePrizePool.sol#3)
+	- >=0.5.0<0.7.0 (contracts/registry/RegistryInterface.sol#3)
+	- >=0.5.0<0.7.0 (contracts/reserve/ReserveInterface.sol#3)
+	- 0.6.12 (contracts/token/ControlledToken.sol#3)
+	- 0.6.12 (contracts/token/ControlledTokenInterface.sol#3)
+	- >=0.5.0<0.7.0 (contracts/token/TokenControllerInterface.sol#3)
+	- >=0.5.0<0.7.0 (contracts/token/TokenListenerInterface.sol#3)
+	- 0.6.12 (contracts/token/TokenListenerLibrary.sol#1)
+	- 0.6.12 (contracts/utils/MappedSinglyLinkedList.sol#3)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#different-pragma-directives-are-used[0m
+[92m
+AddressUpgradeable.functionCall(address,bytes) (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#79-81) is never used and should be removed
+AddressUpgradeable.functionCallWithValue(address,bytes,uint256) (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#104-106) is never used and should be removed
+AddressUpgradeable.functionStaticCall(address,bytes) (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#129-131) is never used and should be removed
+AddressUpgradeable.functionStaticCall(address,bytes,string) (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#139-145) is never used and should be removed
+AddressUpgradeable.sendValue(address,uint256) (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#53-59) is never used and should be removed
+ContextUpgradeable.__Context_init() (@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol#17-19) is never used and should be removed
+ContextUpgradeable._msgData() (@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol#27-30) is never used and should be removed
+CountersUpgradeable.decrement(CountersUpgradeable.Counter) (@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol#37-39) is never used and should be removed
+ECDSAUpgradeable.recover(bytes32,bytes) (@openzeppelin/contracts-upgradeable/cryptography/ECDSAUpgradeable.sol#26-47) is never used and should be removed
+ECDSAUpgradeable.toEthSignedMessageHash(bytes32) (@openzeppelin/contracts-upgradeable/cryptography/ECDSAUpgradeable.sol#81-85) is never used and should be removed
+EIP712Upgradeable.__EIP712_init(string,string) (@openzeppelin/contracts-upgradeable/drafts/EIP712Upgradeable.sol#44-46) is never used and should be removed
+ERC165CheckerUpgradeable.getSupportedInterfaces(address,bytes4[]) (@openzeppelin/contracts-upgradeable/introspection/ERC165CheckerUpgradeable.sol#53-66) is never used and should be removed
+ERC165CheckerUpgradeable.supportsAllInterfaces(address,bytes4[]) (@openzeppelin/contracts-upgradeable/introspection/ERC165CheckerUpgradeable.sol#77-92) is never used and should be removed
+ERC20Upgradeable._beforeTokenTransfer(address,address,uint256) (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#311) is never used and should be removed
+FixedPoint.calculateMantissa(uint256,uint256) (@pooltogether/fixed-point/contracts/FixedPoint.sol#44-48) is never used and should be removed
+FixedPoint.divideUintByMantissa(uint256,uint256) (@pooltogether/fixed-point/contracts/FixedPoint.sol#70-74) is never used and should be removed
+MappedSinglyLinkedList.addAddress(MappedSinglyLinkedList.Mapping,address) (contracts/utils/MappedSinglyLinkedList.sol#47-53) is never used and should be removed
+MappedSinglyLinkedList.addAddresses(MappedSinglyLinkedList.Mapping,address[]) (contracts/utils/MappedSinglyLinkedList.sol#38-42) is never used and should be removed
+MappedSinglyLinkedList.addressArray(MappedSinglyLinkedList.Mapping) (contracts/utils/MappedSinglyLinkedList.sol#79-89) is never used and should be removed
+MappedSinglyLinkedList.clearAll(MappedSinglyLinkedList.Mapping) (contracts/utils/MappedSinglyLinkedList.sol#93-102) is never used and should be removed
+MappedSinglyLinkedList.contains(MappedSinglyLinkedList.Mapping,address) (contracts/utils/MappedSinglyLinkedList.sol#71-73) is never used and should be removed
+MappedSinglyLinkedList.end(MappedSinglyLinkedList.Mapping) (contracts/utils/MappedSinglyLinkedList.sol#34-36) is never used and should be removed
+MappedSinglyLinkedList.initialize(MappedSinglyLinkedList.Mapping) (contracts/utils/MappedSinglyLinkedList.sol#21-24) is never used and should be removed
+MappedSinglyLinkedList.next(MappedSinglyLinkedList.Mapping,address) (contracts/utils/MappedSinglyLinkedList.sol#30-32) is never used and should be removed
+MappedSinglyLinkedList.removeAddress(MappedSinglyLinkedList.Mapping,address,address) (contracts/utils/MappedSinglyLinkedList.sol#59-65) is never used and should be removed
+MappedSinglyLinkedList.start(MappedSinglyLinkedList.Mapping) (contracts/utils/MappedSinglyLinkedList.sol#26-28) is never used and should be removed
+OpenZeppelinSafeMath_V3_3_0.add(uint256,uint256) (@pooltogether/fixed-point/contracts/external/openzeppelin/OpenZeppelinSafeMath_V3_3_0.sol#31-36) is never used and should be removed
+OpenZeppelinSafeMath_V3_3_0.mod(uint256,uint256) (@pooltogether/fixed-point/contracts/external/openzeppelin/OpenZeppelinSafeMath_V3_3_0.sol#141-143) is never used and should be removed
+OpenZeppelinSafeMath_V3_3_0.mod(uint256,uint256,string) (@pooltogether/fixed-point/contracts/external/openzeppelin/OpenZeppelinSafeMath_V3_3_0.sol#157-160) is never used and should be removed
+OpenZeppelinSafeMath_V3_3_0.sub(uint256,uint256) (@pooltogether/fixed-point/contracts/external/openzeppelin/OpenZeppelinSafeMath_V3_3_0.sol#48-50) is never used and should be removed
+OpenZeppelinSafeMath_V3_3_0.sub(uint256,uint256,string) (@pooltogether/fixed-point/contracts/external/openzeppelin/OpenZeppelinSafeMath_V3_3_0.sol#62-67) is never used and should be removed
+PrizePool._balance() (contracts/prize-pool/PrizePool.sol#909) is never used and should be removed
+PrizePool._canAwardExternal(address) (contracts/prize-pool/PrizePool.sol#901) is never used and should be removed
+PrizePool._redeem(uint256) (contracts/prize-pool/PrizePool.sol#918) is never used and should be removed
+PrizePool._supply(uint256) (contracts/prize-pool/PrizePool.sol#913) is never used and should be removed
+PrizePool._token() (contracts/prize-pool/PrizePool.sol#905) is never used and should be removed
+SafeCastUpgradeable.toInt128(int256) (@openzeppelin/contracts-upgradeable/utils/SafeCastUpgradeable.sol#123-126) is never used and should be removed
+SafeCastUpgradeable.toInt16(int256) (@openzeppelin/contracts-upgradeable/utils/SafeCastUpgradeable.sol#177-180) is never used and should be removed
+SafeCastUpgradeable.toInt256(uint256) (@openzeppelin/contracts-upgradeable/utils/SafeCastUpgradeable.sol#207-210) is never used and should be removed
+SafeCastUpgradeable.toInt32(int256) (@openzeppelin/contracts-upgradeable/utils/SafeCastUpgradeable.sol#159-162) is never used and should be removed
+SafeCastUpgradeable.toInt64(int256) (@openzeppelin/contracts-upgradeable/utils/SafeCastUpgradeable.sol#141-144) is never used and should be removed
+SafeCastUpgradeable.toInt8(int256) (@openzeppelin/contracts-upgradeable/utils/SafeCastUpgradeable.sol#195-198) is never used and should be removed
+SafeCastUpgradeable.toUint16(uint256) (@openzeppelin/contracts-upgradeable/utils/SafeCastUpgradeable.sol#78-81) is never used and should be removed
+SafeCastUpgradeable.toUint256(int256) (@openzeppelin/contracts-upgradeable/utils/SafeCastUpgradeable.sol#105-108) is never used and should be removed
+SafeCastUpgradeable.toUint64(uint256) (@openzeppelin/contracts-upgradeable/utils/SafeCastUpgradeable.sol#48-51) is never used and should be removed
+SafeCastUpgradeable.toUint8(uint256) (@openzeppelin/contracts-upgradeable/utils/SafeCastUpgradeable.sol#93-96) is never used and should be removed
+SafeERC20Upgradeable.safeApprove(IERC20Upgradeable,address,uint256) (@openzeppelin/contracts-upgradeable/token/ERC20/SafeERC20Upgradeable.sol#37-46) is never used and should be removed
+SafeERC20Upgradeable.safeDecreaseAllowance(IERC20Upgradeable,address,uint256) (@openzeppelin/contracts-upgradeable/token/ERC20/SafeERC20Upgradeable.sol#53-56) is never used and should be removed
+SafeERC20Upgradeable.safeIncreaseAllowance(IERC20Upgradeable,address,uint256) (@openzeppelin/contracts-upgradeable/token/ERC20/SafeERC20Upgradeable.sol#48-51) is never used and should be removed
+SafeMathUpgradeable.div(uint256,uint256,string) (@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol#190-193) is never used and should be removed
+SafeMathUpgradeable.mod(uint256,uint256) (@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol#152-155) is never used and should be removed
+SafeMathUpgradeable.mod(uint256,uint256,string) (@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol#210-213) is never used and should be removed
+SafeMathUpgradeable.tryAdd(uint256,uint256) (@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol#24-28) is never used and should be removed
+SafeMathUpgradeable.tryDiv(uint256,uint256) (@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol#60-63) is never used and should be removed
+SafeMathUpgradeable.tryMod(uint256,uint256) (@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol#70-73) is never used and should be removed
+SafeMathUpgradeable.tryMul(uint256,uint256) (@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol#45-53) is never used and should be removed
+SafeMathUpgradeable.trySub(uint256,uint256) (@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol#35-38) is never used and should be removed
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dead-code[0m
+[92m
+Pragma version>=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol#3) is too complex
+Pragma version>=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/cryptography/ECDSAUpgradeable.sol#3) is too complex
+Pragma version>=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/drafts/EIP712Upgradeable.sol#3) is too complex
+Pragma version>=0.6.5<0.8.0 (@openzeppelin/contracts-upgradeable/drafts/ERC20PermitUpgradeable.sol#3) is too complex
+Pragma version>=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/drafts/IERC20PermitUpgradeable.sol#3) is too complex
+Pragma version>=0.6.2<0.8.0 (@openzeppelin/contracts-upgradeable/introspection/ERC165CheckerUpgradeable.sol#3) is too complex
+Pragma version>=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/introspection/IERC165Upgradeable.sol#3) is too complex
+Pragma version>=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol#3) is too complex
+Pragma version>=0.4.24<0.8.0 (@openzeppelin/contracts-upgradeable/proxy/Initializable.sol#4) is too complex
+Pragma version>=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#3) is too complex
+Pragma version>=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol#3) is too complex
+Pragma version>=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/token/ERC20/SafeERC20Upgradeable.sol#3) is too complex
+Pragma version>=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/token/ERC721/IERC721ReceiverUpgradeable.sol#3) is too complex
+Pragma version>=0.6.2<0.8.0 (@openzeppelin/contracts-upgradeable/token/ERC721/IERC721Upgradeable.sol#3) is too complex
+Pragma version>=0.6.2<0.8.0 (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#3) is too complex
+Pragma version>=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol#3) is too complex
+Pragma version>=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol#3) is too complex
+Pragma version>=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol#3) is too complex
+Pragma version>=0.6.0<0.8.0 (@openzeppelin/contracts-upgradeable/utils/SafeCastUpgradeable.sol#3) is too complex
+Pragma version>=0.6.0<0.8.0 (@pooltogether/fixed-point/contracts/FixedPoint.sol#19) is too complex
+Pragma version>=0.6.0<0.8.0 (@pooltogether/fixed-point/contracts/external/openzeppelin/OpenZeppelinSafeMath_V3_3_0.sol#5) is too complex
+Pragma version>=0.5.0<0.7.0 (contracts/registry/RegistryInterface.sol#3) allows old versions
+Pragma version>=0.5.0<0.7.0 (contracts/reserve/ReserveInterface.sol#3) allows old versions
+Pragma version>=0.5.0<0.7.0 (contracts/token/TokenControllerInterface.sol#3) allows old versions
+Pragma version>=0.5.0<0.7.0 (contracts/token/TokenListenerInterface.sol#3) allows old versions
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity[0m
+[92m
+Low level call in ERC165CheckerUpgradeable._callERC165SupportsInterface(address,bytes4) (@openzeppelin/contracts-upgradeable/introspection/ERC165CheckerUpgradeable.sol#121-130):
+	- (success,result) = account.staticcall{gas: 30000}(encodedParams) (@openzeppelin/contracts-upgradeable/introspection/ERC165CheckerUpgradeable.sol#127)
+Low level call in AddressUpgradeable.sendValue(address,uint256) (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#53-59):
+	- (success) = recipient.call{value: amount}() (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#57)
+Low level call in AddressUpgradeable.functionCallWithValue(address,bytes,uint256,string) (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#114-121):
+	- (success,returndata) = target.call{value: value}(data) (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#119)
+Low level call in AddressUpgradeable.functionStaticCall(address,bytes,string) (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#139-145):
+	- (success,returndata) = target.staticcall(data) (@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol#143)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls[0m
+[92m
+Function OwnableUpgradeable.__Ownable_init() (@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol#27-30) is not in mixedCase
+Function OwnableUpgradeable.__Ownable_init_unchained() (@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol#32-36) is not in mixedCase
+Variable OwnableUpgradeable.__gap (@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol#74) is not in mixedCase
+Function EIP712Upgradeable.__EIP712_init(string,string) (@openzeppelin/contracts-upgradeable/drafts/EIP712Upgradeable.sol#44-46) is not in mixedCase
+Function EIP712Upgradeable.__EIP712_init_unchained(string,string) (@openzeppelin/contracts-upgradeable/drafts/EIP712Upgradeable.sol#48-53) is not in mixedCase
+Function EIP712Upgradeable._EIP712NameHash() (@openzeppelin/contracts-upgradeable/drafts/EIP712Upgradeable.sol#107-109) is not in mixedCase
+Function EIP712Upgradeable._EIP712VersionHash() (@openzeppelin/contracts-upgradeable/drafts/EIP712Upgradeable.sol#117-119) is not in mixedCase
+Variable EIP712Upgradeable._HASHED_NAME (@openzeppelin/contracts-upgradeable/drafts/EIP712Upgradeable.sol#27) is not in mixedCase
+Variable EIP712Upgradeable._HASHED_VERSION (@openzeppelin/contracts-upgradeable/drafts/EIP712Upgradeable.sol#28) is not in mixedCase
+Variable EIP712Upgradeable.__gap (@openzeppelin/contracts-upgradeable/drafts/EIP712Upgradeable.sol#120) is not in mixedCase
+Function ERC20PermitUpgradeable.__ERC20Permit_init(string) (@openzeppelin/contracts-upgradeable/drafts/ERC20PermitUpgradeable.sol#35-39) is not in mixedCase
+Function ERC20PermitUpgradeable.__ERC20Permit_init_unchained(string) (@openzeppelin/contracts-upgradeable/drafts/ERC20PermitUpgradeable.sol#41-43) is not in mixedCase
+Function ERC20PermitUpgradeable.DOMAIN_SEPARATOR() (@openzeppelin/contracts-upgradeable/drafts/ERC20PermitUpgradeable.sol#83-85) is not in mixedCase
+Variable ERC20PermitUpgradeable.__gap (@openzeppelin/contracts-upgradeable/drafts/ERC20PermitUpgradeable.sol#86) is not in mixedCase
+Variable ERC20PermitUpgradeable._PERMIT_TYPEHASH (@openzeppelin/contracts-upgradeable/drafts/ERC20PermitUpgradeable.sol#28) is not in mixedCase
+Function IERC20PermitUpgradeable.DOMAIN_SEPARATOR() (@openzeppelin/contracts-upgradeable/drafts/IERC20PermitUpgradeable.sol#50) is not in mixedCase
+Function ERC20Upgradeable.__ERC20_init(string,string) (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#56-59) is not in mixedCase
+Function ERC20Upgradeable.__ERC20_init_unchained(string,string) (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#61-65) is not in mixedCase
+Variable ERC20Upgradeable.__gap (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#312) is not in mixedCase
+Function ContextUpgradeable.__Context_init() (@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol#17-19) is not in mixedCase
+Function ContextUpgradeable.__Context_init_unchained() (@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol#21-22) is not in mixedCase
+Variable ContextUpgradeable.__gap (@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol#31) is not in mixedCase
+Function ReentrancyGuardUpgradeable.__ReentrancyGuard_init() (@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol#39-41) is not in mixedCase
+Function ReentrancyGuardUpgradeable.__ReentrancyGuard_init_unchained() (@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol#43-45) is not in mixedCase
+Variable ReentrancyGuardUpgradeable.__gap (@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol#67) is not in mixedCase
+Contract OpenZeppelinSafeMath_V3_3_0 (@pooltogether/fixed-point/contracts/external/openzeppelin/OpenZeppelinSafeMath_V3_3_0.sol#20-161) is not in CapWords
+Parameter PrizePool.initialize(RegistryInterface,ControlledTokenInterface[],uint256)._reserveRegistry (contracts/prize-pool/PrizePool.sol#190) is not in mixedCase
+Parameter PrizePool.initialize(RegistryInterface,ControlledTokenInterface[],uint256)._controlledTokens (contracts/prize-pool/PrizePool.sol#191) is not in mixedCase
+Parameter PrizePool.initialize(RegistryInterface,ControlledTokenInterface[],uint256)._maxExitFeeMantissa (contracts/prize-pool/PrizePool.sol#192) is not in mixedCase
+Parameter PrizePool.canAwardExternal(address)._externalToken (contracts/prize-pool/PrizePool.sol#239) is not in mixedCase
+Parameter PrizePool.estimateCreditAccrualTime(address,uint256,uint256)._controlledToken (contracts/prize-pool/PrizePool.sol#568) is not in mixedCase
+Parameter PrizePool.estimateCreditAccrualTime(address,uint256,uint256)._principal (contracts/prize-pool/PrizePool.sol#569) is not in mixedCase
+Parameter PrizePool.estimateCreditAccrualTime(address,uint256,uint256)._interest (contracts/prize-pool/PrizePool.sol#570) is not in mixedCase
+Parameter PrizePool.setCreditPlanOf(address,uint128,uint128)._controlledToken (contracts/prize-pool/PrizePool.sol#703) is not in mixedCase
+Parameter PrizePool.setCreditPlanOf(address,uint128,uint128)._creditRateMantissa (contracts/prize-pool/PrizePool.sol#704) is not in mixedCase
+Parameter PrizePool.setCreditPlanOf(address,uint128,uint128)._creditLimitMantissa (contracts/prize-pool/PrizePool.sol#705) is not in mixedCase
+Parameter PrizePool.setLiquidityCap(uint256)._liquidityCap (contracts/prize-pool/PrizePool.sol#783) is not in mixedCase
+Parameter PrizePool.setPrizeStrategy(TokenListenerInterface)._prizeStrategy (contracts/prize-pool/PrizePool.sol#804) is not in mixedCase
+Variable PrizePool._tokens (contracts/prize-pool/PrizePool.sol#160) is not in mixedCase
+Variable PrizePool._currentAwardBalance (contracts/prize-pool/PrizePool.sol#176) is not in mixedCase
+Variable PrizePool._tokenCreditPlans (contracts/prize-pool/PrizePool.sol#181) is not in mixedCase
+Variable PrizePool._tokenCreditBalances (contracts/prize-pool/PrizePool.sol#184) is not in mixedCase
+Parameter StakePrizePool.initialize(RegistryInterface,ControlledTokenInterface[],uint256,IERC20Upgradeable)._reserveRegistry (contracts/prize-pool/stake/StakePrizePool.sol#20) is not in mixedCase
+Parameter StakePrizePool.initialize(RegistryInterface,ControlledTokenInterface[],uint256,IERC20Upgradeable)._controlledTokens (contracts/prize-pool/stake/StakePrizePool.sol#21) is not in mixedCase
+Parameter StakePrizePool.initialize(RegistryInterface,ControlledTokenInterface[],uint256,IERC20Upgradeable)._maxExitFeeMantissa (contracts/prize-pool/stake/StakePrizePool.sol#22) is not in mixedCase
+Parameter StakePrizePool.initialize(RegistryInterface,ControlledTokenInterface[],uint256,IERC20Upgradeable)._stakeToken (contracts/prize-pool/stake/StakePrizePool.sol#23) is not in mixedCase
+Parameter ControlledToken.initialize(string,string,uint8,TokenControllerInterface)._name (contracts/token/ControlledToken.sol#31) is not in mixedCase
+Parameter ControlledToken.initialize(string,string,uint8,TokenControllerInterface)._symbol (contracts/token/ControlledToken.sol#32) is not in mixedCase
+Parameter ControlledToken.initialize(string,string,uint8,TokenControllerInterface)._decimals (contracts/token/ControlledToken.sol#33) is not in mixedCase
+Parameter ControlledToken.initialize(string,string,uint8,TokenControllerInterface)._controller (contracts/token/ControlledToken.sol#34) is not in mixedCase
+Parameter ControlledToken.controllerMint(address,uint256)._user (contracts/token/ControlledToken.sol#58) is not in mixedCase
+Parameter ControlledToken.controllerMint(address,uint256)._amount (contracts/token/ControlledToken.sol#58) is not in mixedCase
+Parameter ControlledToken.controllerBurn(address,uint256)._user (contracts/token/ControlledToken.sol#66) is not in mixedCase
+Parameter ControlledToken.controllerBurn(address,uint256)._amount (contracts/token/ControlledToken.sol#66) is not in mixedCase
+Parameter ControlledToken.controllerBurnFrom(address,address,uint256)._operator (contracts/token/ControlledToken.sol#75) is not in mixedCase
+Parameter ControlledToken.controllerBurnFrom(address,address,uint256)._user (contracts/token/ControlledToken.sol#75) is not in mixedCase
+Parameter ControlledToken.controllerBurnFrom(address,address,uint256)._amount (contracts/token/ControlledToken.sol#75) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions[0m
+[92m
+Redundant expression "this (@openzeppelin/contracts-upgradeable/drafts/EIP712Upgradeable.sol#94)" inEIP712Upgradeable (@openzeppelin/contracts-upgradeable/drafts/EIP712Upgradeable.sol#25-121)
+Redundant expression "this (@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol#28)" inContextUpgradeable (@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol#16-32)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#redundant-statements[0m
+[92m
+ReentrancyGuardUpgradeable.__gap (@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol#67) is never used in StakePrizePool (contracts/prize-pool/stake/StakePrizePool.sol#9-71)
+ERC20PermitUpgradeable.__gap (@openzeppelin/contracts-upgradeable/drafts/ERC20PermitUpgradeable.sol#86) is never used in ControlledToken (contracts/token/ControlledToken.sol#12-98)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unused-state-variable[0m
+[92m
+renounceOwnership() should be declared external:
+	- OwnableUpgradeable.renounceOwnership() (@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol#60-63)
+transferOwnership(address) should be declared external:
+	- OwnableUpgradeable.transferOwnership(address) (@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol#69-73)
+permit(address,address,uint256,uint256,uint8,bytes32,bytes32) should be declared external:
+	- ERC20PermitUpgradeable.permit(address,address,uint256,uint256,uint8,bytes32,bytes32) (@openzeppelin/contracts-upgradeable/drafts/ERC20PermitUpgradeable.sol#48-70)
+nonces(address) should be declared external:
+	- ERC20PermitUpgradeable.nonces(address) (@openzeppelin/contracts-upgradeable/drafts/ERC20PermitUpgradeable.sol#75-77)
+name() should be declared external:
+	- ERC20Upgradeable.name() (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#70-72)
+symbol() should be declared external:
+	- ERC20Upgradeable.symbol() (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#78-80)
+decimals() should be declared external:
+	- ERC20Upgradeable.decimals() (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#95-97)
+totalSupply() should be declared external:
+	- ERC20Upgradeable.totalSupply() (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#102-104)
+balanceOf(address) should be declared external:
+	- ERC20Upgradeable.balanceOf(address) (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#109-111)
+transfer(address,uint256) should be declared external:
+	- ERC20Upgradeable.transfer(address,uint256) (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#121-124)
+approve(address,uint256) should be declared external:
+	- ERC20Upgradeable.approve(address,uint256) (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#140-143)
+transferFrom(address,address,uint256) should be declared external:
+	- ERC20Upgradeable.transferFrom(address,address,uint256) (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#158-162)
+increaseAllowance(address,uint256) should be declared external:
+	- ERC20Upgradeable.increaseAllowance(address,uint256) (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#176-179)
+decreaseAllowance(address,uint256) should be declared external:
+	- ERC20Upgradeable.decreaseAllowance(address,uint256) (@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol#195-198)
+initialize(RegistryInterface,ControlledTokenInterface[],uint256,IERC20Upgradeable) should be declared external:
+	- StakePrizePool.initialize(RegistryInterface,ControlledTokenInterface[],uint256,IERC20Upgradeable) (contracts/prize-pool/stake/StakePrizePool.sol#19-38)
+initialize(string,string,uint8,TokenControllerInterface) should be declared external:
+	- ControlledToken.initialize(string,string,uint8,TokenControllerInterface) (contracts/token/ControlledToken.sol#30-52)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#public-function-that-could-be-declared-external[0m
+bsc:0x4d7F0A96967dcE1E36Dd2fBb131625BbD9106442 analyzed (33 contracts with 77 detectors), 195 result(s) found
